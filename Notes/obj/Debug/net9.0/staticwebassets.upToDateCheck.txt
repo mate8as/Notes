@@ -1,0 +1,4 @@
+C:\Users\Nyolczas Máté\Documents\Visual Studio 2022\Git\Notes\Notes\wwwroot\Js\CursorHelper.js
+C:\Users\Nyolczas Máté\Documents\Visual Studio 2022\Git\Notes\Notes\wwwroot\app.css
+wwwroot\app.css
+wwwroot\Js\CursorHelper.js

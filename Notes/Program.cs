@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using MudBlazor.Services;
 using Notes.Components;
 using Notes.Hubs;
@@ -21,6 +22,8 @@ namespace Notes
                 });
 
             builder.Services.AddMudServices();
+            builder.Services.AddBlazoredLocalStorage();
+
 
             var app = builder.Build();
 

@@ -2,12 +2,12 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Navigation
 
-<h3>Collaborative Note</h3>
 
-<div id="DivTemp" style="width: 100vw; height: 100vh;">
-    @* @onmouseup="OnCursorMoved" @onkeyup="OnCursorMoved" *@
-    <textarea @oninput="OnContentChanged" style="width: 600px; height: 400px;">@content</textarea>
 
+<div id="DivTemp">
+    <h3>Collaborative Note</h3>
+
+   <RichTextEditor></RichTextEditor>
 
     @foreach (KeyValuePair<string, (int cursorX, int cursorY)> cursor in OtherUserCursors)
     {
@@ -69,13 +69,6 @@
     public async Task OnCursorMoved(int cursorX, int sursorY)
     {
         await hubConnection.SendAsync("UpdateCursor", NoteId, userId, cursorX, sursorY);
-
-        // var cursorPosition = await JS.InvokeAsync<Dictionary<string, int>>("cursorHelper.getCursorPosition", "event");
-
-        // if (cursorPosition != null && cursorPosition.ContainsKey("x") && cursorPosition.ContainsKey("y"))
-        // {
-
-        // }
     }
 
     public async ValueTask DisposeAsync()

@@ -1,14 +1,144 @@
 ﻿@inherits LayoutComponentBase
+@inject ILocalStorageService LocalStorage
 
-<MudThemeProvider />
+
+<MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkModeVal" Theme="@costumTheme" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-@Body
 
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
+<MudLayout>
+    <MudAppBar Fixed="true" Elevation="1">
+        <MudToggleIconButton @bind-Toggled="_drawerOpen" @bind-Toggled:after="DrawerStateSave" Icon="@Icons.Material.Filled.MenuOpen" Color="@Color.Secondary"
+        ToggledIcon="@Icons.Material.Filled.ArrowBack" ToggledColor="@Color.Secondary" Size="Size.Large" />
+
+
+        <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Kopó alkatrész kereső</MudText>
+        <MudSpacer />
+
+        <DarkModeSwitch @bind-_isDarkModeVal="@_isDarkModeVal"></DarkModeSwitch>
+    </MudAppBar>
+
+    <MudMainContent Class="pt-0" Style="margin-top: 80px; min-height: calc(100vh - 80px);">
+        <MudDrawerContainer Class="mud-height-full">
+            <MudDrawer Class="mud-drawer-fixed" @bind-Open="_drawerOpen" Fixed="true" Elevation="3" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
+                <NavMenu></NavMenu>
+            </MudDrawer>
+
+            <div class="d-flex justify-center align-center mud-height-full">
+                <ErrorBoundary @ref="errorBoundary" Context="exception">
+                    <ChildContent>
+                        <MudContainer Fixed>
+                            @Body
+                        </MudContainer>
+                    </ChildContent>
+
+                    <ErrorContent>
+                        <MudContainer Style="overflow-y: auto;">
+                            <MudPaper Class="bordered-paper-gp" Elevation="0" Width="100%">
+                                <MudStack Spacing="5">
+                                    <MudStack Row Spacing="0" AlignItems="AlignItems.Center">
+                                        <MudText Typo="Typo.h2" Class="text-gold-glow" Style="margin: auto;">Error</MudText>
+                                    </MudStack>
+
+                                    <MudIcon Icon="@Icons.Material.Filled.ErrorOutline" Style="font-size: 8rem; align-self: center;"></MudIcon>
+
+                                    <MudStack Spacing="3" Class="d-flex text-wrap">
+                                        <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error type:</span> @exception.GetType()</MudText>
+                                        <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error message:</span>  @exception.Message</MudText>
+
+                                        <MudButton Class="mud-button-costum mud-button-lg" OnClick="() => errorBoundary.Recover()" StartIcon="@Icons.Material.Filled.Refresh" Style="align-self: center;"> Reload</MudButton>
+
+                                        @if (exception.InnerException != null)
+                                        {
+                                            <MudStack Spacing="1">
+                                                <MudText Typo="Typo.body1" Style="color: var(--basic-purple);">Error Inner Exception:</MudText>
+                                                <MudText Typo="Typo.body1" Style="color: var(--light-purple);word-break: break-all;">@exception.InnerException</MudText>
+                                            </MudStack>
+
+                                        }
+                                    </MudStack>
+                                </MudStack>
+                            </MudPaper>
+                        </MudContainer>
+                    </ErrorContent>
+                </ErrorBoundary>
+
+                <Footer></Footer>
+            </div>
+        </MudDrawerContainer>
+    </MudMainContent>
+
+
+</MudLayout>
+
+@code {
+    private ErrorBoundary errorBoundary;
+
+    public bool _isDarkModeVal { get; set; }
+    private bool _drawerOpen = true;
+
+    private MudThemeProvider _mudThemeProvider;
+
+    MudTheme costumTheme = new MudTheme()
+        {
+            LayoutProperties = new LayoutProperties()
+            {
+                AppbarHeight = "80px"
+            },
+            PaletteLight = new PaletteLight()
+            {
+                Primary = Colors.Amber.Darken2,
+                Secondary = Colors.Gray.Darken1,
+                AppbarBackground = Colors.Shades.White,
+                LinesDefault = Colors.Amber.Darken2
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = Colors.Amber.Lighten1,
+                Secondary = Colors.Gray.Lighten1,
+                AppbarBackground = Colors.BlueGray.Darken4,
+                LinesDefault = Colors.Amber.Lighten1,
+            }
+        };
+
+
+    protected override void OnInitialized()
+    {
+        errorBoundary = new ErrorBoundary();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkModeVal = await _mudThemeProvider.GetSystemPreference();
+
+            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            StateHasChanged();
+
+            string? drawerState = await LocalStorage.GetItemAsStringAsync("DrawerState");
+
+            if (!string.IsNullOrEmpty(drawerState) && bool.TryParse(drawerState, out bool openValue))
+            {
+                _drawerOpen = openValue;
+                StateHasChanged();
+            }
+        }
+    }
+
+
+    private Task OnSystemPreferenceChanged(bool newValue)
+    {
+        _isDarkModeVal = newValue;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+
+    private async Task DrawerStateSave()
+    {
+        await LocalStorage.SetItemAsStringAsync("DrawerState", _drawerOpen.ToString());
+    }
+}

@@ -8,11 +8,23 @@
     ".NETCoreApp,Version=v9.0": {
       "Notes/1.0.0": {
         "dependencies": {
+          "Blazored.LocalStorage": "4.5.0",
           "Microsoft.AspNetCore.SignalR.Client": "9.0.4",
           "MudBlazor": "8.6.0"
         },
         "runtime": {
           "Notes.dll": {}
+        }
+      },
+      "Blazored.LocalStorage/4.5.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "9.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/Blazored.LocalStorage.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Microsoft.AspNetCore.Authorization/9.0.1": {
@@ -291,6 +303,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Blazored.LocalStorage/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6nZuJwA7zNIKx83IsObiHXZb09ponJOpCClU3en+hI8ZFvrOKXeOw+H7TegQZQrvdR1n9fkrVkEBQZg8vx6ZTw==",
+      "path": "blazored.localstorage/4.5.0",
+      "hashPath": "blazored.localstorage.4.5.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/9.0.1": {
       "type": "package",

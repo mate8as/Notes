@@ -1,4 +1,6 @@
-C:\Users\Nyolczas Máté\Documents\Visual Studio 2022\Git\Notes\Notes\wwwroot\Js\CursorHelper.js
-C:\Users\Nyolczas Máté\Documents\Visual Studio 2022\Git\Notes\Notes\wwwroot\app.css
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\wwwroot\Js\CursorHelper.js
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\wwwroot\app.css
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\wwwroot\Js\RichTextEditor.js
 wwwroot\app.css
 wwwroot\Js\CursorHelper.js
+wwwroot\Js\RichTextEditor.js

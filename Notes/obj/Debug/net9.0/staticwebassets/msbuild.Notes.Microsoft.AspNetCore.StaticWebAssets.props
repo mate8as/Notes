@@ -30,29 +30,47 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ck0gonxjdp</Fingerprint>
-      <Integrity>JPVH3vY73aTAlONf/gUn98JStLpYG9hEbwc0m7cQGqA=</Integrity>
+      <Fingerprint>rxbwucif6v</Fingerprint>
+      <Integrity>b3KOQ1mMU2RjcggLizfYEqhL9RP++sUzR0/yH606sSs=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Js\CursorHelper.js'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Notes.5j8vxo5ray.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Js\RichTextEditor.js'))">
       <SourceType>Package</SourceType>
       <SourceId>Notes</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Notes</BasePath>
-      <RelativePath>Notes.5j8vxo5ray.bundle.scp.css</RelativePath>
+      <RelativePath>Js/RichTextEditor.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>mz62ljf4xg</Fingerprint>
+      <Integrity>Hh8uKcThsBPBMnQpdkdHOQiRu5JnwEriYc32JT86N1s=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Js\RichTextEditor.js'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Notes.9vkjuo244f.bundle.scp.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Notes</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Notes</BasePath>
+      <RelativePath>Notes.9vkjuo244f.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>5j8vxo5ray</Fingerprint>
-      <Integrity>8W1xfA+dQbU1wtR+l+t2oI+o6Ncaqd+Hx0yn66w3s6w=</Integrity>
+      <Fingerprint>9vkjuo244f</Fingerprint>
+      <Integrity>m7E6SSyWHovMb6K+fO2AEgN02AsHhlRZTYQdVOhWzJU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Notes.5j8vxo5ray.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Notes.9vkjuo244f.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

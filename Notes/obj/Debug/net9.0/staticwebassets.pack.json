@@ -1,15 +1,19 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Notes.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Notes.5j8vxo5ray.bundle.scp.css"
+      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Notes.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Notes.9vkjuo244f.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
+      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
       "PackagePath": "staticwebassets\\Js\\CursorHelper.js"
     },
     {
-      "Id": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\wwwroot\\app.css",
+      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
+      "PackagePath": "staticwebassets\\Js\\RichTextEditor.js"
+    },
+    {
+      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {

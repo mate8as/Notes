@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\Notes.csproj": {}
+    "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Notes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\Notes.csproj": {
+    "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Notes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\Notes.csproj",
+        "projectUniqueName": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Notes.csproj",
         "projectName": "Notes",
-        "projectPath": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\Notes.csproj",
-        "packagesPath": "C:\\Users\\Nyolczas Máté\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\obj\\",
+        "projectPath": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Notes.csproj",
+        "packagesPath": "C:\\Users\\noy1mr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nyolczas Máté\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\noy1mr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -50,6 +50,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
               "version": "[9.0.4, )"

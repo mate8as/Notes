@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "Blazored.LocalStorage/4.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Blazored.LocalStorage.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Blazored.LocalStorage.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/9.0.1": {
         "type": "package",
         "dependencies": {
@@ -442,6 +454,22 @@
     }
   },
   "libraries": {
+    "Blazored.LocalStorage/4.5.0": {
+      "sha512": "6nZuJwA7zNIKx83IsObiHXZb09ponJOpCClU3en+hI8ZFvrOKXeOw+H7TegQZQrvdR1n9fkrVkEBQZg8vx6ZTw==",
+      "type": "package",
+      "path": "blazored.localstorage/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "blazored.localstorage.4.5.0.nupkg.sha512",
+        "blazored.localstorage.nuspec",
+        "icon.png",
+        "lib/net6.0/Blazored.LocalStorage.dll",
+        "lib/net7.0/Blazored.LocalStorage.dll",
+        "lib/net8.0/Blazored.LocalStorage.dll"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/9.0.1": {
       "sha512": "WgLlLBlMczb2+QLNG6sM95OUZ0EBztz60k/N75tjIgpyu0SdpIfYytAmX/7JJAjRTZF0c/CrWaQV+SH9FuGsrA==",
       "type": "package",
@@ -1074,28 +1102,29 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Blazored.LocalStorage >= 4.5.0",
       "Microsoft.AspNetCore.SignalR.Client >= 9.0.4",
       "MudBlazor >= 8.6.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nyolczas Máté\\.nuget\\packages\\": {},
+    "C:\\Users\\noy1mr\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\Notes.csproj",
+      "projectUniqueName": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Notes.csproj",
       "projectName": "Notes",
-      "projectPath": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\Notes.csproj",
-      "packagesPath": "C:\\Users\\Nyolczas Máté\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nyolczas Máté\\Documents\\Visual Studio 2022\\Git\\Notes\\Notes\\obj\\",
+      "projectPath": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Notes.csproj",
+      "packagesPath": "C:\\Users\\noy1mr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Nyolczas Máté\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\noy1mr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1128,6 +1157,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "Blazored.LocalStorage": {
+            "target": "Package",
+            "version": "[4.5.0, )"
+          },
           "Microsoft.AspNetCore.SignalR.Client": {
             "target": "Package",
             "version": "[9.0.4, )"

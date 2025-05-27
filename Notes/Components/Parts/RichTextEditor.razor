@@ -1,150 +1,250 @@
-﻿
+﻿@if (isDarkModeOn)
+{
+    <style>
+        .active {
+            -webkit-box-shadow: inset 0px 0px 5px 1px var(--mud-palette-primary), 0px 0px 3px 0px #A3A3A3;
+            box-shadow: inset 0px 0px 5px 1px var(--mud-palette-primary), 0px 0px 3px 0px #A3A3A3;
+        }
+    </style>
+}
+else
+{
+    <style>
+        .active {
+            -webkit-box-shadow: inset 0px 0px 10px 1px var(--mud-palette-primary), 0px 0px 2px 0px #353535;
+            box-shadow: inset 0px 0px 10px 1px var(--mud-palette-primary), 0px 0px 2px 0px #353535;
+        }
+    </style>
+}
 
 <style>
-    .active {
-        background-color: var(--mud-palette-primary);
-        color: white;
+    .option-button, .adv-option-button{
+        border-radius: 5px !important;
     }
 
-    .form-select{
+    .adv-option-button option {
+        color: var(--mud-palette-text-primary);
+        background-color: var(--mud-palette-surface);
+    }
+
+        .adv-option-button option:last-child {
+            border-bottom-right-radius: var(--mud-default-borderradius);
+            border-bottom-left-radius: var(--mud-default-borderradius);
+        }
+
+    .color-picker-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+        .color-picker-wrapper input {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%
+        }
+
+    .form-select {
         background-color: transparent;
         color: currentColor;
         border-bottom: 1px solid currentColor;
         padding: 3px;
+        outline: none;
+        box-shadow: none;
     }
 
+    .util-dropdown-btn {
+        border-bottom: 2px solid var(--mud-palette-primary);
+        background-color: var(--mud-palette-primary);
+        padding: 0px 20px;
+        border-radius: 0;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+
+        .util-dropdown-btn:hover {
+            background-color: var(--mud-palette-primary-hover);
+            border-color: var(--mud-palette-primary-hover);
+        }
 </style>
 
-<MudPaper Elevation="0" Style="@($"box-shadow: 0 0 0 2px var(--mud-palette-primary);")">
-    <MudCardHeader Class="pa-0" Style="border-bottom: 1px solid var(--mud-palette-primary)">
-        <MudStack Spacing="2" Row Class="d-flex flex-wrap" AlignItems="AlignItems.Center">
-            <MudTooltip Text="Bold" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="bold" Class="option-button format" Icon="@Icons.Material.Filled.FormatBold" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("bold"))" />
-            </MudTooltip>
 
-            <MudTooltip Text="Italic" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="italic" Class="option-button format" Icon="@Icons.Material.Filled.FormatItalic" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("italic"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Underline" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="underline" Class="option-button format" Icon="@Icons.Material.Filled.FormatUnderlined" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("underline"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Strike trough" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="striketrough" Class="option-button format" Icon="@Icons.Material.Filled.StrikethroughS" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("striketrough"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Super script" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="superscript" Class="option-button script" Icon="@Icons.Material.Filled.Superscript" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("superscript"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Sub script" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="subscript" Class="option-button script" Icon="@Icons.Material.Filled.Subscript" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("subscript"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Ordered list" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="insertOrderList" Class="option-button" Icon="@Icons.Material.Filled.FormatListNumbered" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("insertOrderList"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Bullet list" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="insertBulletList" Class="option-button" Icon="@Icons.Material.Filled.FormatListBulleted" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("insertUnorderedList"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Undo" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="undo" Class="option-button" Icon="@Icons.Material.Filled.Undo" Color="Color.Inherit" />
-            </MudTooltip>
-
-            <MudTooltip Text="Redo" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="redo" Class="option-button" Icon="@Icons.Material.Filled.Redo" Color="Color.Inherit" />
-            </MudTooltip>
-
-            <MudTooltip Text="Insert link" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="createLink" Class="adv-option-button" Icon="@Icons.Material.Filled.InsertLink" Color="Color.Inherit" />
-            </MudTooltip>
-
-            <MudTooltip Text="Remove link" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="unlink" Class="option-button" Icon="@Icons.Material.Filled.LinkOff" Color="Color.Inherit" />
-            </MudTooltip>
-
-            <MudTooltip Text="Align left" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="justifyLeft" Class="option-button align" Icon="@Icons.Material.Filled.FormatAlignLeft" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyLeft"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Align center" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="justifyCenter" Class="option-button align" Icon="@Icons.Material.Filled.FormatAlignCenter" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyCenter"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Align right" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="justifyRight" Class="option-button align" Icon="@Icons.Material.Filled.FormatAlignRight" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyRight"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Align full" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="justifyFull" Class="option-button align" Icon="@Icons.Material.Filled.FormatAlignJustify" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyFull"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Indent" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="indent" Class="option-button spacing" Icon="@Icons.Material.Filled.FormatIndentIncrease" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("indent"))" />
-            </MudTooltip>
-
-            <MudTooltip Text="Outdent" Arrow="true" Placement="Placement.Top">
-                <MudIconButton id="outdent" Class="option-button spacing" Icon="@Icons.Material.Filled.FormatIndentDecrease" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("outdent"))" />
-            </MudTooltip>
-
-            <select id="formatBlock" class="adv-option-button form-select" @oninput="@((value) => ExecCommand("formatBlock", value.Value.ToString()))">
-                <option value="H1">H1</option>
-                <option value="H2">H2</option>
-                <option value="H3">H3</option>
-                <option value="H4">H4</option>
-                <option value="H5">H5</option>
-                <option value="H6">H6</option>
-            </select>
-
-            <select id="fontName" class="adv-option-button form-select" @oninput="@((value) => ExecCommand("fontName", value.Value.ToString()))">
-                <option value="Arial">Arial</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Garamond">Garamond</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Cursive">Cursive</option>
-                <option value="Courier New">Courier New</option>
-            </select>
-
-            <select id="fontSize" class="adv-option-button form-select" @oninput="@((value) => ExecCommand("fontSize", value.Value.ToString()))">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-            </select>
-
-            <div class="input-wrapper">
-                <input type="color" id="foreColor" @oninput="@((value) => ExecCommand("foreColor", value.Value.ToString()))" />
-                <label for="foreColor">Font Color</label>
+<MudMenu PositionAtCursor="true" ActivationEvent="@MouseEvent.RightClick">
+    <ActivatorContent>
+        <MudPaper Elevation="0">
+            <div id="text-input" @ref="editorRef" contenteditable="true" @oninput="OnInput" style="outline: none; box-shadow: none; border: none; width: 500px; height: 500px;">
             </div>
+        </MudPaper>
+    </ActivatorContent>
 
-            <div class="input-wrapper">
-                <input type="color" id="backColor" @oninput="@((value) => ExecCommand("backColor", value.Value.ToString()))" />
-                <label for="backColor">Background color</label>
-            </div>
+    <ChildContent>
+        <MudStack Spacing="0" Row Class="d-flex flex-wrap" AlignItems="AlignItems.Center" Style="gap: 0;max-width: 350px;">
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Bold" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="bold" Class="@(active_utils["bold"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatBold" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["bold"] = !active_utils["bold"]; await ExecCommand("bold");})" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Italic" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="italic" Class="option-button" Icon="@Icons.Material.Filled.FormatItalic" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("italic"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Underline" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="underline" Class="option-button" Icon="@Icons.Material.Filled.FormatUnderlined" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("underline"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Strike trough" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="strikethrough" Class="option-button" Icon="@Icons.Material.Filled.StrikethroughS" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("strikethrough"))" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Super script" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="superscript" Class="option-button" Icon="@Icons.Material.Filled.Superscript" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("superscript"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Sub script" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="subscript" Class="option-button" Icon="@Icons.Material.Filled.Subscript" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("subscript"))" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Ordered list" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="insertOrderList" Class="option-button" Icon="@Icons.Material.Filled.FormatListNumbered" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("insertOrderList"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Bullet list" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="insertBulletList" Class="option-button" Icon="@Icons.Material.Filled.FormatListBulleted" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("insertUnorderedList"))" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Undo" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="undo" Class="option-button" Icon="@Icons.Material.Filled.Undo" Color="Color.Inherit" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Redo" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="redo" Class="adv-option-button" Icon="@Icons.Material.Filled.Redo" Color="Color.Inherit" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Insert link" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="createLink" Class="adv-option-button" Icon="@Icons.Material.Filled.InsertLink" Color="Color.Inherit" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Remove link" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="unlink" Class="option-button" Icon="@Icons.Material.Filled.LinkOff" Color="Color.Inherit" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Align left" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="justifyLeft" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignLeft" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyLeft"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Align center" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="justifyCenter" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignCenter" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyCenter"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Align right" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="justifyRight" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignRight" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyRight"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Align full" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="justifyFull" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignJustify" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyFull"))" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="0" Row>
+                <MudTooltip Text="Indent" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="indent" Class="option-button" Icon="@Icons.Material.Filled.FormatIndentIncrease" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("indent"))" Size="Size.Small" />
+                </MudTooltip>
+
+                <MudTooltip Text="Outdent" Arrow="true" Placement="Placement.Top">
+                    <MudIconButton id="outdent" Class="option-button" Icon="@Icons.Material.Filled.FormatIndentDecrease" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("outdent"))" Size="Size.Small" />
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="2" Row>
+                @*   <select id="formatBlock" class="adv-option-button form-select ms-1" @oninput="@((value) => ExecCommand("formatBlock", value.Value.ToString()))">
+                    <option value="H1">H1</option>
+                    <option value="H2">H2</option>
+                    <option value="H3">H3</option>
+                    <option value="H4">H4</option>
+                    <option value="H5">H5</option>
+                    <option value="H6">H6</option>
+                </select> *@
+
+                <MudTooltip Text="Font" Arrow="true" Placement="Placement.Top">
+                    <select id="fontName" class="adv-option-button form-select" @oninput="@((value) => ExecCommand("fontName", value.Value.ToString()))" style="width: 80px;">
+                        <option value="Arial">Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Garamond">Garamond</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Cursive">Cursive</option>
+                        <option value="Courier New">Courier New</option>
+                    </select>
+                </MudTooltip>
+
+                <MudTooltip Text="Size" Arrow="true" Placement="Placement.Top">
+                    <select id="fontSize" class="adv-option-button form-select me-1" @oninput="@((value) => ExecCommand("fontSize", value.Value.ToString()))" style="width: 35px;">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </MudTooltip>
+            </MudStack>
+
+            <MudDivider Vertical="true" FlexItem="true" />
+
+            <MudStack Spacing="1" Row>
+                <div class="color-picker-wrapper">
+                    <input type="color" id="foreColor" @oninput="@OnForeColorChanded" />
+
+                    <label for="foreColor"><MudIcon Icon="@Icons.Material.Outlined.FormatColorText" Style="@($"color: {SelectedForeColor}")" Size="Size.Small"></MudIcon></label>
+                </div>
+
+                <div class="color-picker-wrapper">
+                    <input type="color" id="backColor" @oninput="@OnBackColorChanded" />
+
+                    <label for="backColor"><MudIcon Icon="@Icons.Material.Outlined.FormatColorFill" Style="@($"color: {SelectedBackColor}")" Size="Size.Small"></MudIcon></label>
+                </div>
+            </MudStack>
         </MudStack>
+    </ChildContent>
+</MudMenu>
 
-        <MudToolBar WrapContent="true" Style="min-height: 40px;">
-
-        </MudToolBar>
-    </MudCardHeader>
-
-    <MudCardContent>
-        <div id="text-input" @ref="editorRef" contenteditable="true" @oninput="OnInput">
-        </div>
-    </MudCardContent>
-</MudPaper>
 
 @code {
     [Parameter]
     public string Content { get; set; }
+
+    [Parameter]
+    public bool isDarkModeOn { get; set; }
 
     [Parameter]
     public EventCallback<string> ContentChanged { get; set; }
@@ -154,13 +254,46 @@
     [Inject]
     private IJSRuntime JS { get; set; }
 
+    private Dictionary<string, bool> active_utils = new()
+    {
+        { "bold", false },
+        { "italic", false },
+        { "underline", false },
+        { "striketrough", false },
+        { "superscript", false },
+        { "subscript", false },
+        { "insertOrderList", false },
+        { "insertUnorderedList", false },
+        { "justifyLeft", false },
+        { "justifyCenter", false },
+        { "justifyRight", false },
+        { "justifyFull", false },
+        { "indent", false },
+        { "outdent", false }
+    };
+
+    bool _utilExpanded = true;
+
+    private string SelectedForeColor = "";
+    private string SelectedBackColor = "";
+
+    private async Task OnBackColorChanded(ChangeEventArgs e)
+    {
+        SelectedBackColor = e.Value?.ToString() ?? "";
+        await ExecCommand("backColor", SelectedBackColor);
+    }
+
+    private async Task OnForeColorChanded(ChangeEventArgs e)
+    {
+        SelectedForeColor = e.Value?.ToString() ?? "";
+        await ExecCommand("foreColor", SelectedForeColor);
+    }
 
     private async Task ExecCommand(string command, string? value = null)
     {
         await JS.InvokeVoidAsync("document.execCommand", command, false, value);
         await OnInput(); // update content
     }
-
     private async Task OnInput()
     {
         var html = await JS.InvokeAsync<string>("getEditorHtml", editorRef);

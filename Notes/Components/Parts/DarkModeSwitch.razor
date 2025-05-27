@@ -1,3 +1,4 @@
+@inject DarkModeSwitchStateContainer DarkModeSwitchStateContainer
 
 <MudToggleIconButton Class="me-6" Icon="@Icons.Material.Filled.LightMode" Toggled="@_isDarkModeVal"  ToggledChanged="OnToggleChanged" ToggledIcon="@Icons.Material.Filled.DarkMode" Size="Size.Large"/>
 
@@ -11,9 +12,12 @@
     public bool _isDarkModeVal { get; set; }
 
 
-    private Task OnToggleChanged(bool toggled)
+    private async Task OnToggleChanged(bool toggled)
     {
         _isDarkModeVal = toggled;
-        return _isDarkModeValChanged.InvokeAsync(_isDarkModeVal);
+        await DarkModeSwitchStateContainer.SetDarkMode(toggled);
+
+
+        await _isDarkModeValChanged.InvokeAsync(_isDarkModeVal);
     }
 }

@@ -128,6 +128,6 @@ C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\bin\Debug\net9.0
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\on26woggdx-9vkjuo244f.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\j1hfu2wsns-9vkjuo244f.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\2y8vmrrrs8-rxbwucif6v.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\ykoozdw6zc-mz62ljf4xg.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\bin\Debug\net9.0\libman.json
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\2y8vmrrrs8-z88ym0bzgs.gz
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\ykoozdw6zc-l6cyh6vs52.gz

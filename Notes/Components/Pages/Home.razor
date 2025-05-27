@@ -1,13 +1,14 @@
-﻿@page "/"
-@using Microsoft.AspNetCore.SignalR.Client
+﻿@using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Navigation
+@inject DarkModeSwitchStateContainer DarkModeSwitchStateContainer
 
+@page "/"
 
 
 <div id="DivTemp">
     <h3>Collaborative Note</h3>
 
-   <RichTextEditor></RichTextEditor>
+    <RichTextEditor isDarkModeOn="DarkModeSwitchStateContainer.GetDarkMode()"></RichTextEditor>
 
     @foreach (KeyValuePair<string, (int cursorX, int cursorY)> cursor in OtherUserCursors)
     {
@@ -45,6 +46,8 @@
 
         await hubConnection.StartAsync();
         await hubConnection.SendAsync("JoinNote", NoteId);
+
+        DarkModeSwitchStateContainer.OnDarkModeChanged += async () => await InvokeAsync(StateHasChanged);  
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

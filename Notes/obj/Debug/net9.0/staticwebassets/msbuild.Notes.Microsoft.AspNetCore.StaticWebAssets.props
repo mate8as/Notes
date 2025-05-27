@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>rxbwucif6v</Fingerprint>
-      <Integrity>b3KOQ1mMU2RjcggLizfYEqhL9RP++sUzR0/yH606sSs=</Integrity>
+      <Fingerprint>z88ym0bzgs</Fingerprint>
+      <Integrity>vVv7DuTRd/SpFnDvhG2APhDMXPGqxGbCuXdQhV4LoN0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Js\CursorHelper.js'))</OriginalItemSpec>
@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mz62ljf4xg</Fingerprint>
-      <Integrity>Hh8uKcThsBPBMnQpdkdHOQiRu5JnwEriYc32JT86N1s=</Integrity>
+      <Fingerprint>l6cyh6vs52</Fingerprint>
+      <Integrity>LeuKLDKLO/05mkLgoY96WIRQeM4jp/B50lfNo0UuPc4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Js\RichTextEditor.js'))</OriginalItemSpec>

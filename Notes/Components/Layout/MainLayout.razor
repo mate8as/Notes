@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject ILocalStorageService LocalStorage
-
+@inject DarkModeSwitchStateContainer DarkModeSwitchStateContainer
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkModeVal" Theme="@costumTheme" />
 <MudPopoverProvider />
@@ -11,13 +11,13 @@
 <MudLayout>
     <MudAppBar Fixed="true" Elevation="1">
         <MudToggleIconButton @bind-Toggled="_drawerOpen" @bind-Toggled:after="DrawerStateSave" Icon="@Icons.Material.Filled.MenuOpen" Color="@Color.Secondary"
-        ToggledIcon="@Icons.Material.Filled.ArrowBack" ToggledColor="@Color.Secondary" Size="Size.Large" />
+                             ToggledIcon="@Icons.Material.Filled.ArrowBack" ToggledColor="@Color.Secondary" Size="Size.Large" />
 
 
-        <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Kopó alkatrész kereső</MudText>
+        <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Notes</MudText>
         <MudSpacer />
 
-        <DarkModeSwitch @bind-_isDarkModeVal="@_isDarkModeVal"></DarkModeSwitch>
+        <DarkModeSwitch _isDarkModeValChanged="HandleDarkModeChange"></DarkModeSwitch>
     </MudAppBar>
 
     <MudMainContent Class="pt-0" Style="margin-top: 80px; min-height: calc(100vh - 80px);">
@@ -113,10 +113,7 @@
     {
         if (firstRender)
         {
-            _isDarkModeVal = await _mudThemeProvider.GetSystemPreference();
-
-            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
-            StateHasChanged();
+            await HandleDarkModeChange(await _mudThemeProvider.GetSystemPreference());
 
             string? drawerState = await LocalStorage.GetItemAsStringAsync("DrawerState");
 
@@ -128,14 +125,13 @@
         }
     }
 
-
-    private Task OnSystemPreferenceChanged(bool newValue)
+    private async Task HandleDarkModeChange(bool IsDarkModeOn)
     {
-        _isDarkModeVal = newValue;
-        StateHasChanged();
-        return Task.CompletedTask;
-    }
+        _isDarkModeVal = IsDarkModeOn;
 
+        await DarkModeSwitchStateContainer.SetDarkMode(IsDarkModeOn);
+        StateHasChanged();
+    }
 
     private async Task DrawerStateSave()
     {

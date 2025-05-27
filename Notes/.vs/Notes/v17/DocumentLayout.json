@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\parts\\richtexteditor.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\parts\\richtexteditor.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\wwwroot\\js\\cursorhelper.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|",
+      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:wwwroot\\js\\cursorhelper.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\wwwroot\\js\\richtexteditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:wwwroot\\js\\richtexteditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\wwwroot\\js\\cursorhelper.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:wwwroot\\js\\cursorhelper.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\parts\\darkmodeswitch.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -35,16 +23,24 @@
       "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\hubs\\noteshub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 216,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,42 +62,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RichTextEditor.js",
-              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
-              "RelativeDocumentMoniker": "wwwroot\\Js\\RichTextEditor.js",
-              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
-              "RelativeToolTip": "wwwroot\\Js\\RichTextEditor.js",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAlwBwAAAAgAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "CursorHelper.js",
+              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
+              "RelativeDocumentMoniker": "wwwroot\\Js\\CursorHelper.js",
+              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
+              "RelativeToolTip": "wwwroot\\Js\\CursorHelper.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-08T09:33:43.869Z",
+              "WhenOpened": "2025-05-23T12:01:04.619Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "RichTextEditor.js",
+              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
+              "RelativeDocumentMoniker": "wwwroot\\Js\\RichTextEditor.js",
+              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js*",
+              "RelativeToolTip": "wwwroot\\Js\\RichTextEditor.js*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-23T12:09:40.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "RichTextEditor.razor",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Parts\\RichTextEditor.razor",
               "RelativeDocumentMoniker": "Components\\Parts\\RichTextEditor.razor",
               "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Parts\\RichTextEditor.razor",
               "RelativeToolTip": "Components\\Parts\\RichTextEditor.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAoBAAAAAAAAAAAnwB4BAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-08T07:46:56.807Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "DarkModeSwitch.razor",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Parts\\DarkModeSwitch.razor",
               "RelativeDocumentMoniker": "Components\\Parts\\DarkModeSwitch.razor",
               "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Parts\\DarkModeSwitch.razor",
               "RelativeToolTip": "Components\\Parts\\DarkModeSwitch.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T07:22:32.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-08T07:22:32.619Z"
             },
             {
               "$type": "Document",
@@ -113,47 +121,31 @@
               "RelativeToolTip": "Components\\Layout\\NavMenu.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T07:21:03.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-08T07:21:03.484Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor",
               "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Layout\\MainLayout.razor",
               "RelativeToolTip": "Components\\Layout\\MainLayout.razor",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAhwGYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAnwEIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-04T13:02:16.94Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-04T13:02:16.94Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "Home.razor",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
               "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Pages\\Home.razor",
               "RelativeToolTip": "Components\\Pages\\Home.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAewCoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-27T06:17:08.622Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CursorHelper.js",
-              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
-              "RelativeDocumentMoniker": "wwwroot\\Js\\CursorHelper.js",
-              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
-              "RelativeToolTip": "wwwroot\\Js\\CursorHelper.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-27T06:16:21.817Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T06:17:08.622Z"
             },
             {
               "$type": "Document",
@@ -165,25 +157,11 @@
               "RelativeToolTip": "Components\\Routes.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T07:48:49.876Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-08T07:48:49.876Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\_Imports.razor",
-              "RelativeDocumentMoniker": "Components\\_Imports.razor",
-              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\_Imports.razor",
-              "RelativeToolTip": "Components\\_Imports.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-27T06:17:08.245Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "App.razor",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\App.razor",
               "RelativeDocumentMoniker": "Components\\App.razor",
@@ -191,25 +169,23 @@
               "RelativeToolTip": "Components\\App.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-27T06:16:32.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T06:16:32.296Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAMwBsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T06:15:05.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T06:15:05.597Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "NotesHub.cs",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Hubs\\NotesHub.cs",
               "RelativeDocumentMoniker": "Hubs\\NotesHub.cs",
@@ -217,8 +193,7 @@
               "RelativeToolTip": "Hubs\\NotesHub.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T06:14:43.945Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T06:14:43.945Z"
             }
           ]
         }

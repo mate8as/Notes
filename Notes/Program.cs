@@ -2,6 +2,7 @@ using Blazored.LocalStorage;
 using MudBlazor.Services;
 using Notes.Components;
 using Notes.Hubs;
+using Notes.StateContainers;
 
 namespace Notes
 {
@@ -24,6 +25,8 @@ namespace Notes
             builder.Services.AddMudServices();
             builder.Services.AddBlazoredLocalStorage();
 
+
+            builder.Services.AddScoped<DarkModeSwitchStateContainer>();
 
             var app = builder.Build();
 

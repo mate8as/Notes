@@ -8,7 +8,7 @@
 <div id="DivTemp">
     <h3>Collaborative Note</h3>
 
-    <RichTextEditor isDarkModeOn="DarkModeSwitchStateContainer.GetDarkMode()"></RichTextEditor>
+    <RichTextEditor isDarkModeOn="DarkModeSwitchStateContainer.GetDarkMode()" Content="@Content" ContentChanged="OnContentChanged"></RichTextEditor>
 
     @foreach (KeyValuePair<string, (int cursorX, int cursorY)> cursor in OtherUserCursors)
     {
@@ -23,31 +23,13 @@
     [Parameter] public string NoteId { get; set; } = "1";
 
     private HubConnection hubConnection;
-    private string content = string.Empty;
+    private string Content = string.Empty;
     private string userId = Guid.NewGuid().ToString();
     private Dictionary<string, (int cursorX, int cursorY)> OtherUserCursors = new();
 
     protected override async Task OnInitializedAsync()
     {
-        hubConnection = new HubConnectionBuilder().WithUrl(Navigation.ToAbsoluteUri("/noteshub")).WithAutomaticReconnect().Build();
-
-        hubConnection.On<string>("ReceiveContentUpdate", async (newContent) =>
-        {
-            content = newContent;
-            await InvokeAsync(StateHasChanged);
-        });
-
-        hubConnection.On<string, int, int>("ReceiveCursorUpdate", async (otherUserId, positionX, positionY) =>
-        {
-            OtherUserCursors[otherUserId] = (positionX, positionY);
-            await InvokeAsync(StateHasChanged);
-        });
-
-
-        await hubConnection.StartAsync();
-        await hubConnection.SendAsync("JoinNote", NoteId);
-
-        DarkModeSwitchStateContainer.OnDarkModeChanged += async () => await InvokeAsync(StateHasChanged);  
+       
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -57,15 +39,41 @@
             var lDotNetReference = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("setDotnetReference", lDotNetReference);
 
+
+
+
+            hubConnection = new HubConnectionBuilder().WithUrl(Navigation.ToAbsoluteUri("/noteshub")).WithAutomaticReconnect().Build();
+
+
+            hubConnection.On<string, string>("ReceiveContentUpdate", async (newContent, senderId) =>
+            {
+                if (senderId == userId)
+                    return;
+
+                Content = newContent;
+                await InvokeAsync(StateHasChanged);
+            });
+
+            hubConnection.On<string, int, int>("ReceiveCursorUpdate", async (otherUserId, positionX, positionY) =>
+            {
+                OtherUserCursors[otherUserId] = (positionX, positionY);
+                await InvokeAsync(StateHasChanged);
+            });
+
+
+            await hubConnection.StartAsync();
+            await hubConnection.SendAsync("JoinNote", NoteId);
+
+            DarkModeSwitchStateContainer.OnDarkModeChanged += async () => await InvokeAsync(StateHasChanged);
         }
 
         base.OnAfterRender(firstRender);
     }
 
-    private async Task OnContentChanged(ChangeEventArgs e)
+    private async Task OnContentChanged(string content)
     {
-        content = e.Value?.ToString() ?? "";
-        await hubConnection.SendAsync("UpdateContent", NoteId, content);
+        Content = content;
+        await hubConnection.SendAsync("UpdateContent", NoteId, content, userId);
     }
 
     [JSInvokable]

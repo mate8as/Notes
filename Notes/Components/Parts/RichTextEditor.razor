@@ -18,19 +18,19 @@ else
 }
 
 <style>
-    .option-button, .adv-option-button{
+    .option-button, .adv-option-button {
         border-radius: 5px !important;
     }
 
-    .adv-option-button option {
-        color: var(--mud-palette-text-primary);
-        background-color: var(--mud-palette-surface);
-    }
-
-        .adv-option-button option:last-child {
-            border-bottom-right-radius: var(--mud-default-borderradius);
-            border-bottom-left-radius: var(--mud-default-borderradius);
+        .adv-option-button option {
+            color: var(--mud-palette-text-primary);
+            background-color: var(--mud-palette-surface);
         }
+
+            .adv-option-button option:last-child {
+                border-bottom-right-radius: var(--mud-default-borderradius);
+                border-bottom-left-radius: var(--mud-default-borderradius);
+            }
 
     .color-picker-wrapper {
         position: relative;
@@ -70,64 +70,72 @@ else
 </style>
 
 
-<MudMenu PositionAtCursor="true" ActivationEvent="@MouseEvent.RightClick">
+<MudMenu Open="@_utilOpened" OpenChanged="OnUtilOpenChanged" PositionAtCursor="true" ActivationEvent="@MouseEvent.RightClick">
     <ActivatorContent>
         <MudPaper Elevation="0">
-            <div id="text-input" @ref="editorRef" contenteditable="true" @oninput="OnInput" style="outline: none; box-shadow: none; border: none; width: 500px; height: 500px;">
+            <div id="text-input" @ref="editorRef" contenteditable="true" @oninput="OnInput" @onkeydown="() => _utilOpened = false"
+                 style="outline: none; box-shadow: none; border: none; width: 500px; height: 500px;">
             </div>
         </MudPaper>
     </ActivatorContent>
 
     <ChildContent>
-        <MudStack Spacing="0" Row Class="d-flex flex-wrap" AlignItems="AlignItems.Center" Style="gap: 0;max-width: 350px;">
-            <MudStack Spacing="0" Row>
+        <MudStack Spacing="0" Row Class="d-flex flex-wrap" AlignItems="AlignItems.Center" Style="gap: 0; row-gap: 3px; max-width: 375px;padding: 0px 5px;">
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Bold" Arrow="true" Placement="Placement.Top">
                     <MudIconButton id="bold" Class="@(active_utils["bold"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatBold" Color="Color.Inherit"
                                    OnClick="@(async () => { active_utils["bold"] = !active_utils["bold"]; await ExecCommand("bold");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Italic" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="italic" Class="option-button" Icon="@Icons.Material.Filled.FormatItalic" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("italic"))" Size="Size.Small" />
+                    <MudIconButton id="italic" Class="@(active_utils["italic"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatItalic" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["italic"] = !active_utils["italic"]; await ExecCommand("italic");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Underline" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="underline" Class="option-button" Icon="@Icons.Material.Filled.FormatUnderlined" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("underline"))" Size="Size.Small" />
+                    <MudIconButton id="underline" Class="@(active_utils["underline"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatUnderlined" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["underline"] = !active_utils["underline"]; await ExecCommand("underline");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Strike trough" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="strikethrough" Class="option-button" Icon="@Icons.Material.Filled.StrikethroughS" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("strikethrough"))" Size="Size.Small" />
+                    <MudIconButton id="strikethrough" Class="@(active_utils["strikethrough"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.StrikethroughS" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["strikethrough"] = !active_utils["strikethrough"]; await ExecCommand("strikethrough");})" Size="Size.Small" />
                 </MudTooltip>
             </MudStack>
 
 
             <MudDivider Vertical="true" FlexItem="true" />
 
-            <MudStack Spacing="0" Row>
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Super script" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="superscript" Class="option-button" Icon="@Icons.Material.Filled.Superscript" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("superscript"))" Size="Size.Small" />
+                    <MudIconButton id="superscript" Class="@(active_utils["superscript"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.Superscript" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["superscript"] = !active_utils["superscript"]; await ExecCommand("superscript");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Sub script" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="subscript" Class="option-button" Icon="@Icons.Material.Filled.Subscript" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("subscript"))" Size="Size.Small" />
+                    <MudIconButton id="subscript" Class="@(active_utils["subscript"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.Subscript" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["subscript"] = !active_utils["subscript"]; await ExecCommand("subscript");})" Size="Size.Small" />
                 </MudTooltip>
             </MudStack>
 
             <MudDivider Vertical="true" FlexItem="true" />
 
 
-            <MudStack Spacing="0" Row>
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Ordered list" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="insertOrderList" Class="option-button" Icon="@Icons.Material.Filled.FormatListNumbered" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("insertOrderList"))" Size="Size.Small" />
+                    <MudIconButton id="insertOrderList" Class="@(active_utils["insertOrderList"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatListNumbered" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["insertOrderList"] = !active_utils["insertOrderList"]; await ExecCommand("insertOrderList");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Bullet list" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="insertBulletList" Class="option-button" Icon="@Icons.Material.Filled.FormatListBulleted" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("insertUnorderedList"))" Size="Size.Small" />
+                    <MudIconButton id="insertBulletList" Class="@(active_utils["insertUnorderedList"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatListBulleted" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["insertUnorderedList"] = !active_utils["insertUnorderedList"]; await ExecCommand("insertUnorderedList");})" Size="Size.Small" />
                 </MudTooltip>
             </MudStack>
 
             <MudDivider Vertical="true" FlexItem="true" />
 
-            <MudStack Spacing="0" Row>
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Undo" Arrow="true" Placement="Placement.Top">
                     <MudIconButton id="undo" Class="option-button" Icon="@Icons.Material.Filled.Undo" Color="Color.Inherit" Size="Size.Small" />
                 </MudTooltip>
@@ -139,7 +147,7 @@ else
 
             <MudDivider Vertical="true" FlexItem="true" />
 
-            <MudStack Spacing="0" Row>
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Insert link" Arrow="true" Placement="Placement.Top">
                     <MudIconButton id="createLink" Class="adv-option-button" Icon="@Icons.Material.Filled.InsertLink" Color="Color.Inherit" Size="Size.Small" />
                 </MudTooltip>
@@ -151,27 +159,31 @@ else
 
             <MudDivider Vertical="true" FlexItem="true" />
 
-            <MudStack Spacing="0" Row>
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Align left" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="justifyLeft" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignLeft" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyLeft"))" Size="Size.Small" />
+                    <MudIconButton id="justifyLeft" Class="@(active_utils["justifyLeft"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatAlignLeft" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["justifyLeft"] = !active_utils["justifyLeft"]; active_utils["justifyCenter"] = active_utils["justifyRight"] = active_utils["justifyFull"]  = false; await ExecCommand("justifyLeft");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Align center" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="justifyCenter" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignCenter" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyCenter"))" Size="Size.Small" />
+                    <MudIconButton id="justifyCenter" Class="@(active_utils["justifyCenter"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatAlignCenter" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["justifyCenter"] = !active_utils["justifyCenter"]; active_utils["justifyLeft"] = active_utils["justifyRight"] = active_utils["justifyFull"]  = false; await ExecCommand("justifyCenter");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Align right" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="justifyRight" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignRight" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyRight"))" Size="Size.Small" />
+                    <MudIconButton id="justifyRight" Class="@(active_utils["justifyRight"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatAlignRight" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["justifyRight"] = !active_utils["justifyRight"]; active_utils["justifyLeft"] = active_utils["justifyCenter"] = active_utils["justifyFull"]  = false; await ExecCommand("justifyRight");})" Size="Size.Small" />
                 </MudTooltip>
 
                 <MudTooltip Text="Align full" Arrow="true" Placement="Placement.Top">
-                    <MudIconButton id="justifyFull" Class="option-button" Icon="@Icons.Material.Filled.FormatAlignJustify" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("justifyFull"))" Size="Size.Small" />
+                    <MudIconButton id="justifyFull" Class="@(active_utils["justifyFull"] ? "option-button active" : "option-button")" Icon="@Icons.Material.Filled.FormatAlignJustify" Color="Color.Inherit"
+                                   OnClick="@(async () => { active_utils["justifyFull"] = !active_utils["justifyFull"]; active_utils["justifyLeft"] = active_utils["justifyCenter"] = active_utils["justifyRight"]  = false; await ExecCommand("justifyFull");})" Size="Size.Small" />
                 </MudTooltip>
             </MudStack>
 
             <MudDivider Vertical="true" FlexItem="true" />
 
-            <MudStack Spacing="0" Row>
+            <MudStack Spacing="1" Row>
                 <MudTooltip Text="Indent" Arrow="true" Placement="Placement.Top">
                     <MudIconButton id="indent" Class="option-button" Icon="@Icons.Material.Filled.FormatIndentIncrease" Color="Color.Inherit" OnClick="@(() =>  ExecCommand("indent"))" Size="Size.Small" />
                 </MudTooltip>
@@ -241,7 +253,9 @@ else
 
 @code {
     [Parameter]
-    public string Content { get; set; }
+    public string Content { get; set; } = "<p>valami content<br/></p>";
+
+    private string _lastContent = "";
 
     [Parameter]
     public bool isDarkModeOn { get; set; }
@@ -259,7 +273,7 @@ else
         { "bold", false },
         { "italic", false },
         { "underline", false },
-        { "striketrough", false },
+        { "strikethrough", false },
         { "superscript", false },
         { "subscript", false },
         { "insertOrderList", false },
@@ -272,10 +286,29 @@ else
         { "outdent", false }
     };
 
-    bool _utilExpanded = true;
+    bool _utilOpened = false;
 
     private string SelectedForeColor = "";
     private string SelectedBackColor = "";
+
+
+    protected override void OnParametersSet()
+    {
+        if (Content != _lastContent)
+        {
+            _utilOpened = false;
+            _lastContent = Content;
+
+            JS.InvokeVoidAsync("setEditorHtml", editorRef, Content);
+        }
+    }
+
+    private void OnUtilOpenChanged(bool open)
+    {
+        _utilOpened = open;
+
+        JS.InvokeVoidAsync("focusEditor", editorRef);
+    }
 
     private async Task OnBackColorChanded(ChangeEventArgs e)
     {
@@ -291,13 +324,14 @@ else
 
     private async Task ExecCommand(string command, string? value = null)
     {
-        await JS.InvokeVoidAsync("document.execCommand", command, false, value);
+        // await JS.InvokeVoidAsync("document.execCommand", command, false, value);
+        await JS.InvokeVoidAsync("performAction", editorRef, command, value);
         await OnInput(); // update content
     }
     private async Task OnInput()
     {
-        var html = await JS.InvokeAsync<string>("getEditorHtml", editorRef);
-        Content = html;
-        await ContentChanged.InvokeAsync(html);
+        Content = await JS.InvokeAsync<string>("getEditorHtml", editorRef);
+        _lastContent = Content;
+        await ContentChanged.InvokeAsync(Content);
     }
 }

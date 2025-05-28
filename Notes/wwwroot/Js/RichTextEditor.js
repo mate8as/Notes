@@ -1,7 +1,30 @@
 ﻿window.getEditorHtml = (element) => {
-    return element.innerHTML;
+   
+    return element.innerHTML.replace(/<!--[\s\S]*?-->/g, "");
 };
 
+window.setEditorHtml = function (element, html) {
+    element.innerHTML = html;
+};
+
+window.performAction = function (editor, command, value) {
+
+    document.execCommand(command, false, value);
+    window.focusEditor(editor);
+};
+
+window.focusEditor = function (editor) {
+    editor.focus();
+};
+
+window.placeCaretToEnd = function (editor) {
+
+    let range = document.createRange();
+    range.selectNodeContents(editor);
+    range.collapse(false); // Move caret to end
+    selection.removeAllRanges();
+    selection.addRange(range);
+};
 
 
 let optionsButtons = document.querySelectorAll(".option-button");

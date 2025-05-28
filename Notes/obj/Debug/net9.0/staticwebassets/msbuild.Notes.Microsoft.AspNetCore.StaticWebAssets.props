@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>l6cyh6vs52</Fingerprint>
-      <Integrity>LeuKLDKLO/05mkLgoY96WIRQeM4jp/B50lfNo0UuPc4=</Integrity>
+      <Fingerprint>zoxddcdnol</Fingerprint>
+      <Integrity>LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Js\RichTextEditor.js'))</OriginalItemSpec>

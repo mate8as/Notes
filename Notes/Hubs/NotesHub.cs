@@ -15,10 +15,9 @@ namespace Notes.Hubs
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, noteId);
         }
 
-        public async Task UpdateContent(string noteId, string newContent)
+        public async Task UpdateContent(string noteId, string newContent, string senderId)
         {
-            await Clients.OthersInGroup(noteId)
-                .SendAsync("ReceiveContentUpdate", newContent);
+            await Clients.OthersInGroup(noteId).SendAsync("ReceiveContentUpdate", newContent, senderId);
         }
 
         public async Task UpdateCursor(string noteId, string userId, int cursorX, int cursorY)

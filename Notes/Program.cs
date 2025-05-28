@@ -42,7 +42,6 @@ namespace Notes
 
             app.UseAntiforgery();
 
-            app.MapStaticAssets();
             app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
             app.MapHub<NotesHub>("/noteshub");

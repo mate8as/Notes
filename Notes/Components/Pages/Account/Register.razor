@@ -1,0 +1,141 @@
+﻿@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject NavigationManager Navigation
+
+@page "/register"
+@using System.Text.RegularExpressions
+
+
+<MudContainer Fixed style="min-height: 500px; display: flex; align-items: center; justify-content: center;">
+    <MudCard Elevation="3" Class="pa-7">
+        <MudForm @ref="register_form">
+            <MudStack Spacing="2">
+                <MudText Typo="Typo.h4" Color="Color.Primary" Style="text-align: center;">Register</MudText>
+
+                <MudTextField T="string" Label="Username" Required="true" @bind-Value="register_user.Username" RequiredError="User name is required!" />
+
+                <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!" @bind-Value="register_user.Email"
+                Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
+
+                <MudTextField T="string" Label="Password" @bind-Value="register_user.Password" InputType="@parrword_Attrs[0].PasswordInputType" Required="true" RequiredError="Password is required!"
+                Adornment="Adornment.End" AdornmentIcon="@parrword_Attrs[0].PasswordInputIcon" OnAdornmentClick="() => OnPassWVisChange(0)" AdornmentAriaLabel="Show Password"
+                Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" />
+
+                <MudTextField T="string" Label="Repeat Password" InputType="@parrword_Attrs[1].PasswordInputType" AdornmentIcon="@parrword_Attrs[1].PasswordInputIcon" Adornment="Adornment.End"
+                              OnAdornmentClick="() => OnPassWVisChange(1)" Validation="@(new Func<string, string?>(PasswordMatch))" Required="true" RequiredError="Password have to be repetead!" />
+
+                <MudStack Class="mt-5" Spacing="4">
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <MudAlert Severity="Severity.Error" Dense="true">@errorMessage</MudAlert>
+                    }
+
+                    @if (!isRegistering)
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleRegister" FullWidth="true">Register</MudButton>
+
+                        <MudText>Already have an account? <MudLink Href="login">Log in</MudLink></MudText>
+                    }
+                    else
+                    {
+                        <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Medium" />
+                    }
+                </MudStack>
+
+            </MudStack>
+        </MudForm>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private MudForm register_form = new MudForm();
+
+    List<(bool password_isShown, InputType PasswordInputType, string PasswordInputIcon)> parrword_Attrs = new List<(bool, InputType, string)>
+    {
+        (false, InputType.Password, Icons.Material.Filled.VisibilityOff),
+        (false, InputType.Password, Icons.Material.Filled.VisibilityOff)
+    };
+
+    private RegisterModel register_user = new();
+    private string? errorMessage;
+
+    private bool isRegistering = false;
+
+    private async Task HandleRegister()
+    {
+        errorMessage = null;
+
+        await register_form.Validate();
+        if (!register_form.IsValid)
+        {
+            errorMessage = "Please fill in all required fields correctly.";
+            return;
+        }
+
+        var result = await UserManager.CreateAsync(new User() { Id = Guid.NewGuid().ToString(), UserName = register_user.Username, Email = register_user.Email }, register_user.Password);
+
+        if (result.Succeeded)
+        {
+            Navigation.NavigateTo("/login");
+        }
+        else
+        {
+            isRegistering = false;
+            StateHasChanged();
+            errorMessage = string.Join(" ", result.Errors.Select(e => e.Description));
+        }
+    }
+
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+
+        if (pw.Length < 8)
+            yield return "Password must be at least of length 8";
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return "Password must contain at least one capital letter";
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return "Password must contain at least one lowercase letter";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Password must contain at least one digit";
+    }
+
+    private string? PasswordMatch(string arg)
+    {
+        if (register_user.Password != arg)
+            return "Passwords don't match";
+
+        return null;
+    }
+
+    private void OnPassWVisChange(int index)
+    {
+        var parrword_Attr = parrword_Attrs[index];
+
+        @if (parrword_Attr.password_isShown)
+        {
+            parrword_Attr.password_isShown = false;
+            parrword_Attr.PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            parrword_Attr.PasswordInputType = InputType.Password;
+        }
+        else
+        {
+            parrword_Attr.password_isShown = true;
+            parrword_Attr.PasswordInputIcon = Icons.Material.Filled.Visibility;
+            parrword_Attr.PasswordInputType = InputType.Text;
+        }
+
+        parrword_Attrs[index] = parrword_Attr;
+    }
+
+    private class RegisterModel
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}

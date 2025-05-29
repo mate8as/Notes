@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace Notes.Models;
 
-public partial class NotesContext : DbContext
+public partial class NotesContext : IdentityDbContext<User>
 {
     public NotesContext()
     {
@@ -23,14 +24,22 @@ public partial class NotesContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=145.223.82.144,3306;database=Notes;user id=root;password=Csillagom77?", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.42-mysql"));
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Use the connection string from configuration
+            var configuration = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appsettings.json").Build();
+
+            var connectionString = configuration.GetConnectionString("NotesContext");
+            optionsBuilder.UseMySql(connectionString, ServerVersion.Parse("8.0.42-mysql"));
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .UseCollation("utf8mb4_hu_0900_as_cs")
-            .HasCharSet("utf8mb4");
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.UseCollation("utf8mb4_hu_0900_as_cs").HasCharSet("utf8mb4");
 
         modelBuilder.Entity<NoteFile>(entity =>
         {
@@ -48,30 +57,27 @@ public partial class NotesContext : DbContext
 
             entity.HasIndex(e => e.NoteFileId, "FK_NoteFileUsers_NoteFiles");
 
-            entity.HasIndex(e => e.UserId, "FK_NoteFileUsers_Users");
 
             entity.Property(e => e.NoteFileId).HasColumnName("NoteFile_Id");
-            entity.Property(e => e.UserId).HasColumnName("User_Id");
+            entity.Property(e => e.UserId).HasColumnName("UserId");
 
             entity.HasOne(d => d.NoteFile).WithMany(p => p.NoteFileUsers)
                 .HasForeignKey(d => d.NoteFileId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_NoteFileUsers_NoteFiles");
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             entity.HasOne(d => d.User).WithMany(p => p.NoteFileUsers)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_NoteFileUsers_Users");
+               .HasForeignKey(d => d.UserId)
+               .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.Property(e => e.Name).HasMaxLength(500);
-            entity.Property(e => e.Password).HasColumnType("text");
             entity.Property(e => e.PreferredColor).HasMaxLength(10);
-            entity.Property(e => e.Username).HasMaxLength(100);
+            entity.Property(e => e.Id).HasMaxLength(100);
+
+            entity.ToTable("Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

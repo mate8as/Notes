@@ -1,17 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace Notes.Models;
 
-public partial class User
+public partial class User : IdentityUser
 {
-    public int Id { get; set; }
-
-    public string? Name { get; set; }
-
-    public string Username { get; set; } = null!;
-
-    public string Password { get; set; } = null!;
+    public string Id { get; set; }
 
     public string? PreferredColor { get; set; }
 

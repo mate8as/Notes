@@ -1,0 +1,2 @@
+﻿Scaffold-DbContext "Server=145.223.82.144,3306;Database=Notes;User ID=root;Password=Csillagom77?" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -Force
+dotnet ef dbcontext scaffold "Server=145.223.82.144,3306;Database=Notes;User ID=root;Password=Csillagom77?" Pomelo.EntityFrameworkCore.MySql -o Models/Scaffolded --context ScaffoldedContext

@@ -17,6 +17,11 @@
         <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Notes</MudText>
         <MudSpacer />
 
+        <MudMenu Label="Notes profile" StartIcon="@Icons.Material.Filled.Person" EndIcon="@Icons.Material.Filled.KeyboardArrowDown">
+            <MudMenuItem Icon="@Icons.Material.Filled.PersonAdd" Label="Register" Href="register"/>
+            <MudMenuItem Icon="@Icons.Material.Filled.Login" Label="Login" Href="login" />
+        </MudMenu>
+
         <DarkModeSwitch _isDarkModeValChanged="HandleDarkModeChange"></DarkModeSwitch>
     </MudAppBar>
 

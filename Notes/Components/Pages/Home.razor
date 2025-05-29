@@ -1,12 +1,19 @@
-﻿@using Microsoft.AspNetCore.SignalR.Client
-@inject NavigationManager Navigation
+﻿@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject DarkModeSwitchStateContainer DarkModeSwitchStateContainer
+@inject UserManager<User> UserManager
 
 @page "/"
+@page "/home"
 
 
 <div id="DivTemp">
     <h3>Collaborative Note</h3>
+
+    @if (currentUser != null)
+    {
+        <MudText>Hello @currentUser.UserName!</MudText>
+    }
 
     <RichTextEditor isDarkModeOn="DarkModeSwitchStateContainer.GetDarkMode()" Content="@Content" ContentChanged="OnContentChanged"></RichTextEditor>
 
@@ -15,6 +22,8 @@
         <MudAvatar Color="Color.Primary" Style="@($"position: absolute; top: {cursor.Value.cursorY}px; left: {cursor.Value.cursorX}px;")">M</MudAvatar>
     }
 </div>
+
+<button @onclick="CheckCookies">Check cookies</button>
 
 
 
@@ -27,9 +36,27 @@
     private string userId = Guid.NewGuid().ToString();
     private Dictionary<string, (int cursorX, int cursorY)> OtherUserCursors = new();
 
+    private User? currentUser = null;
+
     protected override async Task OnInitializedAsync()
     {
-       
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            // You can access claims like email or name
+            var email = user.FindFirst(c => c.Type == ClaimTypes.Email)?.Value;
+
+            // Or fetch full IdentityUser from the database
+            currentUser = await UserManager.FindByEmailAsync(email);
+        }
+    }
+
+    private async Task CheckCookies()
+    {
+        await JS.InvokeVoidAsync("console.log", "Checking cookies...");
+        await JS.InvokeVoidAsync("eval", "console.log(document.cookie)");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -39,7 +66,7 @@
             var lDotNetReference = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("setDotnetReference", lDotNetReference);
 
-
+            await JS.InvokeVoidAsync("console.log", "All cookies: " + await JS.InvokeAsync<string>("eval", "document.cookie"));
 
 
             hubConnection = new HubConnectionBuilder().WithUrl(Navigation.ToAbsoluteUri("/noteshub")).WithAutomaticReconnect().Build();
@@ -79,6 +106,11 @@
     [JSInvokable]
     public async Task OnCursorMoved(int cursorX, int sursorY)
     {
+        if (hubConnection == null)
+        {
+            return;
+        }
+
         await hubConnection.SendAsync("UpdateCursor", NoteId, userId, cursorX, sursorY);
     }
 

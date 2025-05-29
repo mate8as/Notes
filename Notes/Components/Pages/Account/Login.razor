@@ -1,0 +1,112 @@
+﻿@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject NavigationManager Navigation
+
+@page "/login"
+
+
+<MudContainer Fixed style="min-height: 500px; display: flex; align-items: center; justify-content: center;">
+    <MudCard Elevation="3" Class="pa-7">
+        <MudForm @ref="login_form">
+            <MudStack Spacing="3">
+                <MudText Typo="Typo.h4" Color="Color.Primary" Style="text-align: center;">Login</MudText>
+
+                <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!" @bind-Value="loginModel.Email"
+                Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
+
+                <MudTextField T="string" Label="Password" @bind-Value="loginModel.Password" InputType="@PasswordInput" Required="true" RequiredError="Password is required!"
+                Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="OnPassWVisChange" AdornmentAriaLabel="Show Password" />
+
+                <MudStack Class="mt-3" Spacing="4">
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <MudAlert Severity="Severity.Error" Dense="true">@errorMessage</MudAlert>
+                    }
+
+                    @if (!isAuthenticating)
+                    {
+                        <MudLink>Forgot password?</MudLink>
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleLogin" FullWidth="true">Login</MudButton>
+
+                        <MudText>Don't have an account? <MudLink Href="register">Sign up</MudLink></MudText>
+                    }
+                    else
+                    {
+                        <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Medium" />
+                    }
+                </MudStack>
+
+            </MudStack>
+        </MudForm>
+    </MudCard>
+</MudContainer>
+
+
+@code {
+    private MudForm login_form = new MudForm();
+
+    private bool password_isShown = false;
+    private InputType PasswordInput = InputType.Password;
+    private string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    private LoginModel loginModel = new();
+    private string? errorMessage;
+
+    private bool isAuthenticating = false;
+
+    private async Task HandleLogin()
+    {
+        errorMessage = null;
+
+        await login_form.Validate();
+        if (!login_form.IsValid)
+        {
+            errorMessage = "Please fill in all required fields correctly.";
+            return;
+        }
+
+        isAuthenticating = true;
+        StateHasChanged();
+
+        var user = await UserManager.FindByEmailAsync(loginModel.Email);
+        if (user == null)
+        {
+            errorMessage = "User not found.";
+            isAuthenticating = false;
+            return;
+        }
+
+        var result = await SignInManager.CheckPasswordSignInAsync(user, loginModel.Password, true);
+
+        if (result == Microsoft.AspNetCore.Identity.SignInResult.Success)
+        {
+            Guid key = Guid.NewGuid();
+            BlazorCookieLoginMiddleware.Logins[key] = new LoginInfo { Username = user.UserName, Password = loginModel.Password };
+            isAuthenticating = false;
+            Navigation.NavigateTo($"/login?key={key}", true);
+        }
+        else
+        {
+            errorMessage = "Login failed. Check your password.";
+            isAuthenticating = false;
+            return;
+        }
+    }
+
+    private void OnPassWVisChange()
+    {
+        @if (password_isShown)
+        {
+            password_isShown = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            password_isShown = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+}

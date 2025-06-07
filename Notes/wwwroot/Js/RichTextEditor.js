@@ -17,13 +17,19 @@ window.focusEditor = function (editor) {
     editor.focus();
 };
 
-window.placeCaretToEnd = function (editor) {
+window.setCaretToEnd = (elementId) => {
+    const el = document.getElementById(elementId);
+    if (!el) return;
 
-    let range = document.createRange();
-    range.selectNodeContents(editor);
-    range.collapse(false); // Move caret to end
-    selection.removeAllRanges();
-    selection.addRange(range);
+    el.focus();
+
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false); // Collapse to the end
+
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
 };
 
 

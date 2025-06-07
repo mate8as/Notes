@@ -1,6 +1,8 @@
 ﻿@inherits LayoutComponentBase
-@inject ILocalStorageService LocalStorage
 @inject DarkModeSwitchStateContainer DarkModeSwitchStateContainer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@inject ILocalStorageService LocalStorage
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkModeVal" Theme="@costumTheme" />
 <MudPopoverProvider />
@@ -9,26 +11,31 @@
 
 
 <MudLayout>
-    <MudAppBar Fixed="true" Elevation="1">
-        <MudToggleIconButton @bind-Toggled="_drawerOpen" @bind-Toggled:after="DrawerStateSave" Icon="@Icons.Material.Filled.MenuOpen" Color="@Color.Secondary"
-                             ToggledIcon="@Icons.Material.Filled.ArrowBack" ToggledColor="@Color.Secondary" Size="Size.Large" />
-
-
-        <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Notes</MudText>
-        <MudSpacer />
-
-        <MudMenu Label="Notes profile" StartIcon="@Icons.Material.Filled.Person" EndIcon="@Icons.Material.Filled.KeyboardArrowDown">
-            <MudMenuItem Icon="@Icons.Material.Filled.PersonAdd" Label="Register" Href="register"/>
-            <MudMenuItem Icon="@Icons.Material.Filled.Login" Label="Login" Href="login" />
-        </MudMenu>
-
-        <DarkModeSwitch _isDarkModeValChanged="HandleDarkModeChange"></DarkModeSwitch>
-    </MudAppBar>
-
-    <MudMainContent Class="pt-0" Style="margin-top: 80px; min-height: calc(100vh - 80px);">
+    <MudMainContent Class="pt-0" Style="min-height: calc(100vh - 80px);">
         <MudDrawerContainer Class="mud-height-full">
             <MudDrawer Class="mud-drawer-fixed" @bind-Open="_drawerOpen" Fixed="true" Elevation="3" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
-                <NavMenu></NavMenu>
+                <MudStack Class="pa-3" Style="height: 100%;">
+                    <MudStack Row>
+                        <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Notes</MudText>
+
+                        <DarkModeSwitch _isDarkModeValChanged="HandleDarkModeChange"></DarkModeSwitch>
+                    </MudStack>
+
+                    <MudStack Class="mt-auto">
+                        <MudMenu StartIcon="@Icons.Material.Filled.Person" Label="Profile" EndIcon="@Icons.Material.Filled.ArrowDropDown" AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.BottomLeft">
+                            @if (user.Identity?.IsAuthenticated ?? false)
+                            {
+                                <MudMenuItem Icon="@Icons.Material.Filled.Logout" Label="Logout" Href="logout" />
+                            }
+                            else
+                            {
+                                <MudMenuItem Icon="@Icons.Material.Filled.PersonAdd" Label="Register" Href="register" />
+                                <MudMenuItem Icon="@Icons.Material.Filled.Login" Label="Login" Href="login" />
+                            }
+                        </MudMenu>
+                    </MudStack>
+
+                </MudStack>
             </MudDrawer>
 
             <div class="d-flex justify-center align-center mud-height-full">
@@ -84,6 +91,9 @@
     public bool _isDarkModeVal { get; set; }
     private bool _drawerOpen = true;
 
+    ClaimsPrincipal user = new ClaimsPrincipal();
+    private HubConnection hubConnection;
+
     private MudThemeProvider _mudThemeProvider;
 
     MudTheme costumTheme = new MudTheme()
@@ -119,6 +129,7 @@
         if (firstRender)
         {
             await HandleDarkModeChange(await _mudThemeProvider.GetSystemPreference());
+            await LoadUserCredentials();
 
             string? drawerState = await LocalStorage.GetItemAsStringAsync("DrawerState");
 
@@ -128,6 +139,12 @@
                 StateHasChanged();
             }
         }
+    }
+
+    private async Task LoadUserCredentials()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
     }
 
     private async Task HandleDarkModeChange(bool IsDarkModeOn)
@@ -141,5 +158,13 @@
     private async Task DrawerStateSave()
     {
         await LocalStorage.SetItemAsStringAsync("DrawerState", _drawerOpen.ToString());
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
     }
 }

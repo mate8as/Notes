@@ -1,6 +1,7 @@
 ﻿@inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject NavigationManager Navigation
+@inject ISnackbar Snackbar
 
 @page "/register"
 @using System.Text.RegularExpressions
@@ -76,6 +77,7 @@
 
         if (result.Succeeded)
         {
+            Snackbar.Add("You registered successfully.", Severity.Success);
             Navigation.NavigateTo("/login");
         }
         else

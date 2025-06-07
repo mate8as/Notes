@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dXmm9lSmT5HmQeD3OgnZZO3N4ojAKRuU2vwwY0ejzjs=",
+  "Hash": "+X3xJ0relf2J/asEGzBmmY0laRUnKRKwDro7Tc8Uyds=",
   "Source": "Notes",
   "BasePath": "_content/Notes",
   "Mode": "Default",
@@ -1088,12 +1088,12 @@
       "OriginalItemSpec": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\lib\\bootstrap\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-zoxddcdnol.gz",
+      "Identity": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-x6slfqqd0b.gz",
       "SourceId": "Notes",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Notes",
-      "RelativePath": "Js/RichTextEditor#[.{fingerprint=zoxddcdnol}]?.js.gz",
+      "RelativePath": "Js/RichTextEditor#[.{fingerprint=x6slfqqd0b}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1102,8 +1102,8 @@
       "RelatedAsset": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "gluotbsitc",
-      "Integrity": "5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4=",
+      "Fingerprint": "nsbif0zwoy",
+      "Integrity": "N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js"
@@ -1228,8 +1228,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "zoxddcdnol",
-      "Integrity": "LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A=",
+      "Fingerprint": "x6slfqqd0b",
+      "Integrity": "B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Js\\RichTextEditor.js"
@@ -5054,12 +5054,12 @@
     },
     {
       "Route": "Js/RichTextEditor.js",
-      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-zoxddcdnol.gz",
+      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-x6slfqqd0b.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001200480192"
+          "Quality": "0.001158748552"
         }
       ],
       "ResponseHeaders": [
@@ -5069,15 +5069,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "832"
+          "Value": "862"
         },
         {
           "Name": "ETag",
-          "Value": "\"5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4=\""
+          "Value": "\"N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 27 May 2025 15:22:43 GMT"
+          "Value": "Sat, 07 Jun 2025 11:35:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5097,13 +5097,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A=\""
+          "Value": "W/\"B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A="
+          "Value": "sha256-B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ="
         }
       ]
     },
@@ -5118,7 +5118,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2447"
+          "Value": "2565"
         },
         {
           "Name": "Content-Type",
@@ -5126,11 +5126,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A=\""
+          "Value": "\"B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 27 May 2025 15:22:43 GMT"
+          "Value": "Sat, 07 Jun 2025 11:35:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5140,13 +5140,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A="
+          "Value": "sha256-B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ="
         }
       ]
     },
     {
       "Route": "Js/RichTextEditor.js.gz",
-      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-zoxddcdnol.gz",
+      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-x6slfqqd0b.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5155,7 +5155,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "832"
+          "Value": "862"
         },
         {
           "Name": "Content-Type",
@@ -5163,11 +5163,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4=\""
+          "Value": "\"N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 27 May 2025 15:22:43 GMT"
+          "Value": "Sat, 07 Jun 2025 11:35:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5185,18 +5185,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4="
+          "Value": "sha256-N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po="
         }
       ]
     },
     {
-      "Route": "Js/RichTextEditor.zoxddcdnol.js",
-      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-zoxddcdnol.gz",
+      "Route": "Js/RichTextEditor.x6slfqqd0b.js",
+      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-x6slfqqd0b.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001200480192"
+          "Quality": "0.001158748552"
         }
       ],
       "ResponseHeaders": [
@@ -5206,15 +5206,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "832"
+          "Value": "862"
         },
         {
           "Name": "ETag",
-          "Value": "\"5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4=\""
+          "Value": "\"N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 27 May 2025 15:22:43 GMT"
+          "Value": "Sat, 07 Jun 2025 11:35:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5234,13 +5234,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A=\""
+          "Value": "W/\"B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zoxddcdnol"
+          "Value": "x6slfqqd0b"
         },
         {
           "Name": "label",
@@ -5248,12 +5248,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A="
+          "Value": "sha256-B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ="
         }
       ]
     },
     {
-      "Route": "Js/RichTextEditor.zoxddcdnol.js",
+      "Route": "Js/RichTextEditor.x6slfqqd0b.js",
       "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5263,7 +5263,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2447"
+          "Value": "2565"
         },
         {
           "Name": "Content-Type",
@@ -5271,11 +5271,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A=\""
+          "Value": "\"B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 27 May 2025 15:22:43 GMT"
+          "Value": "Sat, 07 Jun 2025 11:35:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5285,7 +5285,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zoxddcdnol"
+          "Value": "x6slfqqd0b"
         },
         {
           "Name": "label",
@@ -5293,13 +5293,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-LafRhAeUTLCMAxtRPnYH1LkyF0v+abF8NsG4AOHbD2A="
+          "Value": "sha256-B4fe/g7Ri8rZ8gPXXsHrw17nXluivF9ecHtDgWKchPQ="
         }
       ]
     },
     {
-      "Route": "Js/RichTextEditor.zoxddcdnol.js.gz",
-      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-zoxddcdnol.gz",
+      "Route": "Js/RichTextEditor.x6slfqqd0b.js.gz",
+      "AssetFile": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\compressed\\ykoozdw6zc-x6slfqqd0b.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5308,7 +5308,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "832"
+          "Value": "862"
         },
         {
           "Name": "Content-Type",
@@ -5316,11 +5316,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4=\""
+          "Value": "\"N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 27 May 2025 15:22:43 GMT"
+          "Value": "Sat, 07 Jun 2025 11:35:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5338,7 +5338,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zoxddcdnol"
+          "Value": "x6slfqqd0b"
         },
         {
           "Name": "label",
@@ -5346,7 +5346,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5DnhctaFHV89m4wjDETjha7L1ohe2gkBgyxRrD3Dys4="
+          "Value": "sha256-N6sEDFoTLQ9u3kkA+wfTgOcVjkNtXe5ASx1hKmdC2po="
         }
       ]
     },

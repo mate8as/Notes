@@ -1,0 +1,22 @@
+﻿@inject SignInManager<User> SignInManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+
+@page "/logout"
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated ?? false)
+        {
+            Guid key = Guid.NewGuid();
+            BlazorCookieLoginMiddleware.Logins[key] = new LoginInfo { Username = user.Identity.Name, Password = "" };
+            Navigation.NavigateTo($"/logout?key={key}", true);
+        }
+    
+    }
+}

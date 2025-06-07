@@ -70,13 +70,11 @@ else
 </style>
 
 
-<MudMenu Open="@_utilOpened" OpenChanged="OnUtilOpenChanged" PositionAtCursor="true" ActivationEvent="@MouseEvent.RightClick">
+<MudMenu Open="@_utilOpened" OpenChanged="OnUtilOpenChanged" PositionAtCursor="true" ActivationEvent="@MouseEvent.RightClick" Style="width: 100%; height: 100%;">
     <ActivatorContent>
-        <MudPaper Elevation="0">
-            <div id="text-input" @ref="editorRef" contenteditable="true" @oninput="OnInput" @onkeydown="() => _utilOpened = false"
-                 style="outline: none; box-shadow: none; border: none; width: 500px; height: 500px;">
-            </div>
-        </MudPaper>
+        <div id="@editorId" @ref="editorRef" contenteditable="true" @oninput="OnInput" @onkeydown="() => _utilOpened = false"
+             style="outline: none; box-shadow: none; border: none; width: 100%; height: 100%;">
+        </div>
     </ActivatorContent>
 
     <ChildContent>
@@ -268,6 +266,8 @@ else
     [Inject]
     private IJSRuntime JS { get; set; }
 
+    private string editorId = "rich-text-editor-" + Guid.NewGuid().ToString("N");
+
     private Dictionary<string, bool> active_utils = new()
     {
         { "bold", false },
@@ -291,6 +291,13 @@ else
     private string SelectedForeColor = "";
     private string SelectedBackColor = "";
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("setCaretToEnd", editorRef.Id);
+        }
+    }
 
     protected override void OnParametersSet()
     {

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Notes.Middlewares;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Notes.Hubs

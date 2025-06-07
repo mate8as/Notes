@@ -23,17 +23,18 @@ public partial class NotesContext : IdentityDbContext<User>
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            // Use the connection string from configuration
-            var configuration = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appsettings.json").Build();
 
-            var connectionString = configuration.GetConnectionString("NotesContext");
-            optionsBuilder.UseMySql(connectionString, ServerVersion.Parse("8.0.42-mysql"));
-        }
-    }
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (optionsBuilder.IsConfigured)
+    //    {
+    //        // Use the connection string from configuration
+    //        var configuration = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appsettings.json").Build();
+
+    //        var connectionString = configuration.GetConnectionString("NotesContext");
+    //        optionsBuilder.UseMySql(connectionString, ServerVersion.Parse("8.0.42-mysql"));
+    //    }
+    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

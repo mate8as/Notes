@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor;
 using MudBlazor.Services;
 using Notes.Components;
 using Notes.Hubs;
 using Notes.Middlewares;
 using Notes.Models;
+using Notes.Services;
 using Notes.StateContainers;
 using System;
 
@@ -30,16 +32,11 @@ namespace Notes
                     }
                 });
 
-            var configuration = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appsettings.json").Build();
-            var connectionString = configuration.GetConnectionString("NotesContext");
-
             builder.Services.AddDbContext<NotesContext>(options =>
-                    options.UseMySql(
-                       connectionString,
-                        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.42-mysql"),
-                        mySqlOptions => mySqlOptions.EnableRetryOnFailure()
-                    )
-            );
+            {
+                var connectionString = builder.Configuration.GetConnectionString("NotesContext");
+                options.UseMySql(connectionString, ServerVersion.Parse("8.0.42-mysql"), mySqlOptions => mySqlOptions.EnableRetryOnFailure());
+            });
 
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
@@ -84,6 +81,14 @@ namespace Notes
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
             });
 
+            builder.Services.AddMudBlazorSnackbar(config =>
+            {
+                config.PositionClass = Defaults.Classes.Position.BottomEnd;
+                config.PreventDuplicates = true;
+                config.NewestOnTop = false;
+                config.VisibleStateDuration = 3000;
+            });
+
 
             builder.Services.AddCascadingAuthenticationState();
             builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
@@ -122,6 +127,8 @@ namespace Notes
             app.MapControllers();
             app.MapStaticAssets();
             app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+
+           
             app.MapHub<NotesHub>("/noteshub");
 
             app.Run();

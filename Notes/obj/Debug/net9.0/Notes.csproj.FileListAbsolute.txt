@@ -185,7 +185,6 @@ C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\0wz98yz2xy-jrqzp895hu.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\qmbdzoxg8j-4kywy7iv6g.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\2y8vmrrrs8-z88ym0bzgs.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\ykoozdw6zc-zoxddcdnol.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\on26woggdx-9vkjuo244f.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\j1hfu2wsns-9vkjuo244f.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\staticwebassets.build.json
@@ -248,3 +247,4 @@ C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\wbp1y7rbui-63fj8s7r0e.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\c1hrvu7qo4-0j3bgjxly4.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\ykoozdw6zc-x6slfqqd0b.gz

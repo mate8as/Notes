@@ -19,6 +19,52 @@
         right: 0.75rem;
         top: 0.5rem;
     }
+
+#expandingHeader[b-1f84end3jy] {
+    position: sticky;
+    top: 0;
+    height: 50px;
+    background-color: var(--mud-palette-drawer-background);
+    color: var(--mud-palette-drawer-text);
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: height 0.1s ease;
+}
+
+    #expandingHeader.expanded[b-1f84end3jy] {
+    }
+
+    #expandingHeader #exandHeader_title[b-1f84end3jy] {
+        flex-grow: 1;
+        text-align: start;
+        transition: transform 0.3s cubic-bezier(.4,0,.2,1), font-size 0.3s cubic-bezier(.4,0,.2,1);
+        transform: translate(0, 0) scale(1);
+        font-size: 1.5rem;
+    }
+
+    #expandingHeader.expanded #exandHeader_title[b-1f84end3jy] {
+        transform: translate(33vw, 0) scale(1.3);
+        text-align: start; 
+        font-size: 2rem;
+    }
+
+    #expandingHeader #exandHeader_drawer[b-1f84end3jy] {
+        height: fit-content;
+        align-items: start;
+    }
+
+    #expandingHeader.expanded #exandHeader_drawer[b-1f84end3jy] {
+        align-items: start;
+        align-self: end;
+    }
+
+    #expandingHeader.expanded #exandHeader_utils[b-1f84end3jy] {
+        align-items: start;
+        align-self: end;
+    }
 /* _content/Notes/Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-kad9gxx4ky] {
     background-color: rgba(255, 255, 255, 0.1);

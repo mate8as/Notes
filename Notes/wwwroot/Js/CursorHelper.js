@@ -1,14 +1,40 @@
 ﻿
-var GLOBAL = {};
-GLOBAL.DotNetReference = null;
-function setDotnetReference(pDotNetReference) {
-    GLOBAL.DotNetReference = pDotNetReference;
-}
+(function () {
+    window.GLOBAL = window.GLOBAL || {};
+    GLOBAL.DotNetReference = null;
 
-document.addEventListener('mousemove', function (event) {
-    //console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientY);
+    let lastX = 0;
+    let lastY = 0;
+    let dirty = false;
 
-    if (GLOBAL.DotNetReference != null) {
-        GLOBAL.DotNetReference.invokeMethodAsync('OnCursorMoved', event.clientX, event.clientY);
+    document.addEventListener('mousemove', function (event) {
+        lastX = event.clientX;
+        lastY = event.clientY;
+        dirty = true;
+    });
+
+    function sendLoop() {
+        if (dirty && GLOBAL.DotNetReference != null) {
+            GLOBAL.DotNetReference.invokeMethodAsync('OnCursorMoved', lastX, lastY);
+            dirty = false;
+        }
+        requestAnimationFrame(sendLoop);
     }
-});
+
+    requestAnimationFrame(sendLoop);
+
+    window.addEventListener('resize', function () {
+        if (GLOBAL.DotNetReference != null) {
+            GLOBAL.DotNetReference.invokeMethodAsync('SetWindowSize', window.innerWidth, window.innerHeight);
+        }
+    }, true);
+
+    window.CursorHelper = {
+        SetDotnetReference: function (pDotNetReference) {
+            GLOBAL.DotNetReference = pDotNetReference;
+        },
+        GetWindowSize: function () {
+            return [window.innerWidth, window.innerHeight];
+        }
+    };
+})();

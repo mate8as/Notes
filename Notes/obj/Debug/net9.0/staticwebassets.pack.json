@@ -2,19 +2,23 @@
   "Files": [
     {
       "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Notes.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Notes.9vkjuo244f.bundle.scp.css"
+      "PackagePath": "staticwebassets\\Notes.gofdjtnsl3.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
       "PackagePath": "staticwebassets\\Js\\CursorHelper.js"
     },
     {
+      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\ExpandHeader.js",
+      "PackagePath": "staticwebassets\\Js\\ExpandHeader.js"
+    },
+    {
       "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\RichTextEditor.js",
       "PackagePath": "staticwebassets\\Js\\RichTextEditor.js"
     },
     {
-      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\app.css",
-      "PackagePath": "staticwebassets\\app.css"
+      "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
       "Id": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\lib\\bootstrap\\css\\bootstrap-grid.css",

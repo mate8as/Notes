@@ -1,0 +1,16 @@
+﻿<MudMenu StartIcon="@Icons.Material.Filled.Person" Label="Profile" EndIcon="@Icons.Material.Filled.ArrowDropDown" AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.BottomLeft">
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <MudMenuItem Icon="@Icons.Material.Filled.Logout" Label="Logout" Href="logout" />
+    }
+    else
+    {
+        <MudMenuItem Icon="@Icons.Material.Filled.PersonAdd" Label="Register" Href="register" />
+        <MudMenuItem Icon="@Icons.Material.Filled.Login" Label="Login" Href="login" />
+    }
+</MudMenu>
+
+@code {
+    [Parameter]
+    public ClaimsPrincipal User { get; set; }
+}

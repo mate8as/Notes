@@ -3,6 +3,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager Navigation
 @inject ILocalStorageService LocalStorage
+@inject IJSRuntime JS
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkModeVal" Theme="@costumTheme" />
 <MudPopoverProvider />
@@ -11,77 +12,134 @@
 
 
 <MudLayout>
-    <MudMainContent Class="pt-0" Style="min-height: calc(100vh - 80px);">
-        <MudDrawerContainer Class="mud-height-full">
-            <MudDrawer Class="mud-drawer-fixed" @bind-Open="_drawerOpen" Fixed="true" Elevation="3" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
-                <MudStack Class="pa-3" Style="height: 100%;">
-                    <MudStack Row>
-                        <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Notes</MudText>
+    <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+        <MudMainContent Class="pt-0" Style="min-height: calc(100vh - 80px);">
+            <MudDrawerContainer Class="mud-height-full">
+                <MudDrawer Class="mud-drawer-fixed" @bind-Open="_drawerOpen" Fixed="true" Elevation="3" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
+                    <MudStack Class="pa-3" Style="height: 100%;">
+                        <MudStack Row>
+                            <MudText Typo="Typo.h3" Style="@($"color: {(_isDarkModeVal ? Colors.Shades.White : Colors.Shades.Black)}; font-weight: 500;")" Class="ms-5">Notes</MudText>
 
-                        <DarkModeSwitch _isDarkModeValChanged="HandleDarkModeChange"></DarkModeSwitch>
+                            <DarkModeSwitch _isDarkModeValChanged="HandleDarkModeChange"></DarkModeSwitch>
+                        </MudStack>
+
+                        <MudStack Class="mt-auto">
+                            <UserUtilNav User="@user"></UserUtilNav>
+                        </MudStack>
+
                     </MudStack>
+                </MudDrawer>
 
-                    <MudStack Class="mt-auto">
-                        <MudMenu StartIcon="@Icons.Material.Filled.Person" Label="Profile" EndIcon="@Icons.Material.Filled.ArrowDropDown" AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.BottomLeft">
-                            @if (user.Identity?.IsAuthenticated ?? false)
-                            {
-                                <MudMenuItem Icon="@Icons.Material.Filled.Logout" Label="Logout" Href="logout" />
-                            }
-                            else
-                            {
-                                <MudMenuItem Icon="@Icons.Material.Filled.PersonAdd" Label="Register" Href="register" />
-                                <MudMenuItem Icon="@Icons.Material.Filled.Login" Label="Login" Href="login" />
-                            }
-                        </MudMenu>
-                    </MudStack>
+                <div class="d-flex justify-center align-center mud-height-full">
+                    <ErrorBoundary @ref="errorBoundary" Context="exception">
+                        <ChildContent>
+                            <MudContainer Fixed>
+                                @Body
+                            </MudContainer>
+                        </ChildContent>
 
-                </MudStack>
-            </MudDrawer>
+                        <ErrorContent>
+                            <MudContainer Style="overflow-y: auto;">
+                                <MudPaper Class="bordered-paper-gp" Elevation="0" Width="100%">
+                                    <MudStack Spacing="5">
+                                        <MudStack Row Spacing="0" AlignItems="AlignItems.Center">
+                                            <MudText Typo="Typo.h2" Class="text-gold-glow" Style="margin: auto;">Error</MudText>
+                                        </MudStack>
 
-            <div class="d-flex justify-center align-center mud-height-full">
-                <ErrorBoundary @ref="errorBoundary" Context="exception">
-                    <ChildContent>
-                        <MudContainer Fixed>
-                            @Body
-                        </MudContainer>
-                    </ChildContent>
+                                        <MudIcon Icon="@Icons.Material.Filled.ErrorOutline" Style="font-size: 8rem; align-self: center;"></MudIcon>
 
-                    <ErrorContent>
-                        <MudContainer Style="overflow-y: auto;">
-                            <MudPaper Class="bordered-paper-gp" Elevation="0" Width="100%">
-                                <MudStack Spacing="5">
-                                    <MudStack Row Spacing="0" AlignItems="AlignItems.Center">
-                                        <MudText Typo="Typo.h2" Class="text-gold-glow" Style="margin: auto;">Error</MudText>
+                                        <MudStack Spacing="3" Class="d-flex text-wrap">
+                                            <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error type:</span> @exception.GetType()</MudText>
+                                            <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error message:</span>  @exception.Message</MudText>
+
+                                            <MudButton Class="mud-button-costum mud-button-lg" OnClick="() => errorBoundary.Recover()" StartIcon="@Icons.Material.Filled.Refresh" Style="align-self: center;"> Reload</MudButton>
+
+                                            @if (exception.InnerException != null)
+                                            {
+                                                <MudStack Spacing="1">
+                                                    <MudText Typo="Typo.body1" Style="color: var(--basic-purple);">Error Inner Exception:</MudText>
+                                                    <MudText Typo="Typo.body1" Style="color: var(--light-purple);word-break: break-all;">@exception.InnerException</MudText>
+                                                </MudStack>
+
+                                            }
+                                        </MudStack>
                                     </MudStack>
+                                </MudPaper>
+                            </MudContainer>
+                        </ErrorContent>
+                    </ErrorBoundary>
 
-                                    <MudIcon Icon="@Icons.Material.Filled.ErrorOutline" Style="font-size: 8rem; align-self: center;"></MudIcon>
+                    <Footer></Footer>
+                </div>
+            </MudDrawerContainer>
+        </MudMainContent>
+    </MudHidden>
 
-                                    <MudStack Spacing="3" Class="d-flex text-wrap">
-                                        <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error type:</span> @exception.GetType()</MudText>
-                                        <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error message:</span>  @exception.Message</MudText>
 
-                                        <MudButton Class="mud-button-costum mud-button-lg" OnClick="() => errorBoundary.Recover()" StartIcon="@Icons.Material.Filled.Refresh" Style="align-self: center;"> Reload</MudButton>
+    <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+        <MudMainContent Class="pt-0" >
+            <MudDrawerContainer Class="mud-height-full">
+                <div id="expandingHeader" class="vstack">
+                    <div id="exandHeader_drawer">
+                        <MudToggleIconButton @bind-Toggled="_drawerOpen_Mobile" @bind-Toggled:after="DrawerStateSave" Icon="@Icons.Material.Filled.MenuOpen" Color="@Color.Secondary"
+                                             ToggledIcon="@Icons.Material.Filled.ArrowBack" ToggledColor="@Color.Secondary" Size="Size.Medium" />
+                    </div>
 
-                                        @if (exception.InnerException != null)
-                                        {
-                                            <MudStack Spacing="1">
-                                                <MudText Typo="Typo.body1" Style="color: var(--basic-purple);">Error Inner Exception:</MudText>
-                                                <MudText Typo="Typo.body1" Style="color: var(--light-purple);word-break: break-all;">@exception.InnerException</MudText>
+                    <h2 id="exandHeader_title">Notes</h2>
+
+                    <div id="exandHeader_utils">
+                        <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="@Color.Secondary" Size="Size.Medium"></MudIconButton>
+                    </div>
+                </div>
+
+                <MudDrawer Class="mud-drawer-fixed" @bind-Open="_drawerOpen_Mobile" Fixed="true" Elevation="3" Variant="@DrawerVariant.Persistent">
+                    <UserUtilNav User="@user"></UserUtilNav>
+                </MudDrawer>
+
+                <div class="d-flex justify-center align-center mud-height-full">
+                    <MudContainer Fixed>
+                        <ErrorBoundary @ref="errorBoundary" Context="exception">
+                            <ChildContent>
+                                @Body
+                            </ChildContent>
+
+                            <ErrorContent>
+                                <MudContainer Style="overflow-y: auto;">
+                                    <MudPaper Class="bordered-paper-gp" Elevation="0" Width="100%">
+                                        <MudStack Spacing="5">
+                                            <MudStack Row Spacing="0" AlignItems="AlignItems.Center">
+                                                <MudText Typo="Typo.h2" Class="text-gold-glow" Style="margin: auto;">Error</MudText>
                                             </MudStack>
 
-                                        }
-                                    </MudStack>
-                                </MudStack>
-                            </MudPaper>
-                        </MudContainer>
-                    </ErrorContent>
-                </ErrorBoundary>
+                                            <MudIcon Icon="@Icons.Material.Filled.ErrorOutline" Style="font-size: 8rem; align-self: center;"></MudIcon>
 
-                <Footer></Footer>
-            </div>
-        </MudDrawerContainer>
-    </MudMainContent>
+                                            <MudStack Spacing="3" Class="d-flex text-wrap">
+                                                <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error type:</span> @exception.GetType()</MudText>
+                                                <MudText Typo="Typo.body1" Style="color: var(--light-purple);"><span class="text-basic-purple">Error message:</span>  @exception.Message</MudText>
 
+                                                <MudButton Class="mud-button-costum mud-button-lg" OnClick="() => errorBoundary.Recover()" StartIcon="@Icons.Material.Filled.Refresh" Style="align-self: center;"> Reload</MudButton>
+
+                                                @if (exception.InnerException != null)
+                                                {
+                                                    <MudStack Spacing="1">
+                                                        <MudText Typo="Typo.body1" Style="color: var(--basic-purple);">Error Inner Exception:</MudText>
+                                                        <MudText Typo="Typo.body1" Style="color: var(--light-purple);word-break: break-all;">@exception.InnerException</MudText>
+                                                    </MudStack>
+
+                                                }
+                                            </MudStack>
+                                        </MudStack>
+                                    </MudPaper>
+                                </MudContainer>
+                            </ErrorContent>
+                        </ErrorBoundary>
+
+                        <Footer></Footer>
+                    </MudContainer>
+                </div>
+            </MudDrawerContainer>
+        </MudMainContent>
+    </MudHidden>
 
 </MudLayout>
 
@@ -90,6 +148,7 @@
 
     public bool _isDarkModeVal { get; set; }
     private bool _drawerOpen = true;
+    private bool _drawerOpen_Mobile = false;
 
     ClaimsPrincipal user = new ClaimsPrincipal();
     private HubConnection hubConnection;
@@ -98,10 +157,6 @@
 
     MudTheme costumTheme = new MudTheme()
         {
-            LayoutProperties = new LayoutProperties()
-            {
-                AppbarHeight = "80px"
-            },
             PaletteLight = new PaletteLight()
             {
                 Primary = Colors.Amber.Darken2,
@@ -131,6 +186,7 @@
             await HandleDarkModeChange(await _mudThemeProvider.GetSystemPreference());
             await LoadUserCredentials();
 
+           
             string? drawerState = await LocalStorage.GetItemAsStringAsync("DrawerState");
 
             if (!string.IsNullOrEmpty(drawerState) && bool.TryParse(drawerState, out bool openValue))
@@ -138,6 +194,11 @@
                 _drawerOpen = openValue;
                 StateHasChanged();
             }
+
+            StateHasChanged();
+            await Task.Delay(200);
+
+            await JS.InvokeVoidAsync("expandHeader.init");
         }
     }
 

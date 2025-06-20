@@ -9,14 +9,16 @@
 
 
 <MudStack Spacing="10">
-    <MudTextField T="string" Typo="Typo.h4" Class="mt-5 ms-3" Variant="Variant.Text" Required="true" RequiredError="Email is required!" @bind-Value="NoteTitle" Style="max-width: 25%;" />
+    <MudGrid Spacing="0">
+        <MudItem xs="8" sm="6" md="5" lg="4" xl="3" xxl="2">
+            <MudTextField T="string" Typo="Typo.h4" Class="mt-5 ms-3" Variant="Variant.Text" Required="true" RequiredError="Email is required!" @bind-Value="NoteTitle" />
+        </MudItem>
+    </MudGrid>
+
 
     <RichTextEditor isDarkModeOn="DarkModeSwitchStateContainer.GetDarkMode()" Content="@Note.RawContent" ContentChanged="OnContentChanged"></RichTextEditor>
 
-    @foreach (KeyValuePair<string, (int cursorX, int cursorY)> cursor in OtherUserCursors)
-    {
-        <MudAvatar Color="Color.Primary" Style="@($"position: absolute; top: {cursor.Value.cursorY}px; left: {cursor.Value.cursorX}px;")">M</MudAvatar>
-    }
+   <CursorTracker NoteId="@NoteId" userId="@userId"></CursorTracker>
 </MudStack>
 
 
@@ -24,7 +26,7 @@
 @code {
     [Inject] IJSRuntime JS { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public string NoteId { get; set; } = "1";
 
     private HubConnection hubConnection;
@@ -32,9 +34,8 @@
     private NoteFile Note = new NoteFile();
     private string NoteTitle = "Untitled note";
 
-    private string userId = Guid.NewGuid().ToString();
-    private Dictionary<string, (int cursorX, int cursorY)> OtherUserCursors = new();
 
+    private string userId = Guid.NewGuid().ToString();
     private User? currentUser = null;
 
     protected override async Task OnInitializedAsync()
@@ -44,10 +45,9 @@
 
         if (user.Identity?.IsAuthenticated == true)
         {
-            // You can access claims like email or name
-            var email = user.FindFirst(c => c.Type == ClaimTypes.Email)?.Value;
+            string? email = user.FindFirst(c => c.Type == ClaimTypes.Email)?.Value;
 
-            // Or fetch full IdentityUser from the database
+            if (email == null) { Snackbar.Add("The user can't be received, since the email is null. Try to login again!", Severity.Error); return; }
             currentUser = await UserManager.FindByEmailAsync(email);
         }
     }
@@ -56,14 +56,7 @@
     {
         if (firstRender)
         {
-            var lDotNetReference = DotNetObjectReference.Create(this);
-            await JS.InvokeVoidAsync("setDotnetReference", lDotNetReference);
-
-            await JS.InvokeVoidAsync("console.log", "All cookies: " + await JS.InvokeAsync<string>("eval", "document.cookie"));
-
-
             hubConnection = new HubConnectionBuilder().WithUrl(Navigation.ToAbsoluteUri("/noteshub")).WithAutomaticReconnect().Build();
-
 
             hubConnection.On<string, string>("ReceiveContentUpdate", async (newContent, senderId) =>
             {
@@ -74,11 +67,6 @@
                 await InvokeAsync(StateHasChanged);
             });
 
-            hubConnection.On<string, int, int>("ReceiveCursorUpdate", async (otherUserId, positionX, positionY) =>
-            {
-                OtherUserCursors[otherUserId] = (positionX, positionY);
-                await InvokeAsync(StateHasChanged);
-            });
 
             await hubConnection.StartAsync();
             await hubConnection.SendAsync("JoinNote", NoteId);
@@ -86,14 +74,14 @@
             DarkModeSwitchStateContainer.OnDarkModeChanged += async () => await InvokeAsync(StateHasChanged);
         }
 
-        
+
         AuthNotificationHandler();
         base.OnAfterRender(firstRender);
     }
 
     private void AuthNotificationHandler()
     {
-        if (currentUser != null && BlazorCookieLoginMiddleware.PendingNotifications.TryGetValue(currentUser.UserName, out var notification))
+        if (currentUser != null && currentUser.UserName != null && BlazorCookieLoginMiddleware.PendingNotifications.TryGetValue(currentUser.UserName, out var notification))
         {
             Snackbar.Add($"{notification.Event}", notification.Severity);
             BlazorCookieLoginMiddleware.PendingNotifications.Remove(currentUser.UserName);
@@ -104,17 +92,6 @@
     {
         Note.RawContent = content;
         await hubConnection.SendAsync("UpdateContent", NoteId, content, userId);
-    }
-
-    [JSInvokable]
-    public async Task OnCursorMoved(int cursorX, int sursorY)
-    {
-        if (hubConnection == null)
-        {
-            return;
-        }
-
-        await hubConnection.SendAsync("UpdateCursor", NoteId, userId, cursorX, sursorY);
     }
 
     public async ValueTask DisposeAsync()

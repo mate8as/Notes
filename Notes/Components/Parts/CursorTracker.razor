@@ -1,0 +1,194 @@
+﻿@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+
+@foreach (KeyValuePair<string, List<(int cursorX, int cursorY)>> cursor in OtherUserCursors)
+{
+    var userId = cursor.Key;
+    var positions = cursor.Value;
+
+
+
+    if (positions.Count < 1) continue;
+
+    var current = positions.Last();
+
+    <MudAvatar Color="Color.Primary" Style="@($"position: absolute; top: {current.cursorY - 20}px; left: {current.cursorX - 20}px;")">M</MudAvatar>
+
+
+
+    bool isMoving = LastCursorMoveTime.TryGetValue(userId, out var lastMove) &&
+    (DateTime.UtcNow - lastMove) < CursorStopThreshold;
+
+    if (isMoving)
+    {
+        double angle = SmoothedAngles.TryGetValue(userId, out var smoothedAngle) ? smoothedAngle : 0;
+
+        double baseOffset = 15;
+        double maxOffset = 25;
+        double minOffset = 10;
+        double speed = CursorSpeeds.TryGetValue(userId, out var s) ? s : 0;
+        double offset = Math.Clamp(baseOffset + speed * 25, minOffset, maxOffset);
+        double rad = angle * Math.PI / 180;
+        double triangleX = current.cursorX - 20 + offset * Math.Cos(rad);
+        double triangleY = current.cursorY - 20 + offset * Math.Sin(rad);
+
+
+        <svg width="40" height="40" style="@($"position:absolute; top:{Math.Round(triangleY, 0)}px; left:{Math.Round(triangleX, 0)}px; pointer-events:none;")">
+            <g transform="rotate(@Math.Round(angle, 0),20,20)">
+                <path d="M36,20 Q30,18 8,36 Q20,20 8,4 Q30,22 36,20 Z" fill="var(--mud-palette-primary)" />
+            </g>
+        </svg>
+    }
+}
+
+@code {
+    [Parameter]
+    public string userId { get; set; }
+
+    [Parameter]
+    public string NoteId { get; set; }
+
+    private HubConnection hubConnection;
+
+    private Dictionary<string, List<(int cursorX, int cursorY)>> OtherUserCursors = new();
+    private Dictionary<string, double> SmoothedAngles = new();
+
+    private Dictionary<string, DateTime> LastCursorMoveTime = new();
+    private Dictionary<string, DateTime> LastCursorUpdateTime = new();
+    private Dictionary<string, double> CursorSpeeds = new();
+    private TimeSpan CursorStopThreshold = TimeSpan.FromMilliseconds(300);
+
+
+    private User? currentUser = null;
+    private (int width, int height) windowSize = (0, 0);
+
+    private Timer? cursorTimer;
+
+    protected override void OnInitialized()
+    {
+        cursorTimer = new Timer(async _ =>
+        {
+            await InvokeAsync(StateHasChanged);
+        }, null, 0, 100);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var lDotNetReference = DotNetObjectReference.Create(this);
+
+            await JS.InvokeVoidAsync("CursorHelper.SetDotnetReference", lDotNetReference);
+            await SetWindowSize();
+
+            hubConnection = new HubConnectionBuilder().WithUrl(Navigation.ToAbsoluteUri("/noteshub")).WithAutomaticReconnect().Build();
+
+            hubConnection.On<string, int, int>("ReceiveCursorUpdate", HandleReceiveCursorUpdate);
+
+            try
+            {
+                await hubConnection.StartAsync();
+                await hubConnection.SendAsync("JoinNote", NoteId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("SignalR connection failed: " + ex.Message);
+            }
+        }
+
+
+        base.OnAfterRender(firstRender);
+    }
+
+    private async Task HandleReceiveCursorUpdate(string otherUserId, int positionX, int positionY)
+    {
+        if (!OtherUserCursors.ContainsKey(otherUserId))
+            OtherUserCursors[otherUserId] = new();
+
+        var cursorList = OtherUserCursors[otherUserId];
+
+        if (cursorList.Count >= 10)
+            cursorList.RemoveAt(0);
+
+        cursorList.Add((positionX, positionY));
+        LastCursorMoveTime[otherUserId] = DateTime.UtcNow;
+
+        double speed = 0;
+
+        if (cursorList.Count >= 2)
+        {
+            var prev = cursorList[^2];
+            var current = cursorList[^1];
+
+            var dx = current.cursorX - prev.cursorX;
+            var dy = current.cursorY - prev.cursorY;
+            var distance = Math.Sqrt(dx * dx + dy * dy);
+
+            if (dx != 0 || dy != 0)
+            {
+                double newAngle = Math.Atan2(dy, dx) * (180.0 / Math.PI) + 180;
+
+                if (!SmoothedAngles.TryGetValue(otherUserId, out var oldAngle))
+                    oldAngle = newAngle;
+
+                double smoothing = 0.2;
+                double smoothed = oldAngle * (1 - smoothing) + newAngle * smoothing;
+
+                SmoothedAngles[otherUserId] = smoothed;
+            }
+
+            DateTime now = DateTime.UtcNow;
+            if (LastCursorUpdateTime.TryGetValue(otherUserId, out var lastTime))
+            {
+                var ms = (now - lastTime).TotalMilliseconds;
+                if (ms > 0) speed = distance / ms;
+            }
+            LastCursorUpdateTime[otherUserId] = now;
+
+            CursorSpeeds[otherUserId] = speed;
+        }
+        else
+        {
+            LastCursorUpdateTime[otherUserId] = DateTime.UtcNow;
+            CursorSpeeds[otherUserId] = 0;
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task SetWindowSize(int? width = null, int? height = null)
+    {
+        if (width != null && height != null)
+        {
+            windowSize = (width.Value, height.Value);
+            return;
+        }
+
+        var size = await JS.InvokeAsync<int[]>("CursorHelper.GetWindowSize");
+
+        windowSize = (size[0], size[1]);
+    }
+
+    [JSInvokable]
+    public async Task OnCursorMoved(int cursorX, int cursorY)
+    {
+        if (hubConnection == null)
+        {
+            return;
+        }
+
+        await hubConnection.SendAsync("UpdateCursor", NoteId, userId, cursorX, cursorY);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+
+        cursorTimer?.Dispose();
+    }
+}

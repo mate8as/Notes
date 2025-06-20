@@ -183,10 +183,6 @@ C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\scopedcss\projectbundle\Notes.bundle.scp.css
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\tzxjg6is5z-qmvjbof2tn.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\0wz98yz2xy-jrqzp895hu.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\qmbdzoxg8j-4kywy7iv6g.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\2y8vmrrrs8-z88ym0bzgs.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\on26woggdx-9vkjuo244f.gz
-C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\j1hfu2wsns-9vkjuo244f.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -248,3 +244,8 @@ C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\c1hrvu7qo4-0j3bgjxly4.gz
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\ykoozdw6zc-x6slfqqd0b.gz
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\zok9sbm8b5-4kywy7iv6g.gz
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\0h0mw3zt9o-h86ro2fabo.gz
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\on26woggdx-gofdjtnsl3.gz
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\j1hfu2wsns-gofdjtnsl3.gz
+C:\Users\noy1mr\Documents\Visual Studio 2022\GitHub\Notes\Notes\obj\Debug\net9.0\compressed\2y8vmrrrs8-r571kg2pna.gz

@@ -1,4 +1,4 @@
-#blazor-error-ui {
+﻿#blazor-error-ui {
     color-scheme: light only;
     background: lightyellow;
     bottom: 0;
@@ -17,4 +17,50 @@
         position: absolute;
         right: 0.75rem;
         top: 0.5rem;
+    }
+
+#expandingHeader {
+    position: sticky;
+    top: 0;
+    height: 50px;
+    background-color: var(--mud-palette-drawer-background);
+    color: var(--mud-palette-drawer-text);
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: height 0.1s ease;
+}
+
+    #expandingHeader.expanded {
+    }
+
+    #expandingHeader #exandHeader_title {
+        flex-grow: 1;
+        text-align: start;
+        transition: transform 0.3s cubic-bezier(.4,0,.2,1), font-size 0.3s cubic-bezier(.4,0,.2,1);
+        transform: translate(0, 0) scale(1);
+        font-size: 1.5rem;
+    }
+
+    #expandingHeader.expanded #exandHeader_title {
+        transform: translate(33vw, 0) scale(1.3);
+        text-align: start; 
+        font-size: 2rem;
+    }
+
+    #expandingHeader #exandHeader_drawer {
+        height: fit-content;
+        align-items: start;
+    }
+
+    #expandingHeader.expanded #exandHeader_drawer {
+        align-items: start;
+        align-self: end;
+    }
+
+    #expandingHeader.expanded #exandHeader_utils {
+        align-items: start;
+        align-self: end;
     }

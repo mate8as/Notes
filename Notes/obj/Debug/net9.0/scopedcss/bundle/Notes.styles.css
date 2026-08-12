@@ -1,4 +1,4 @@
-/* _content/Notes/Components/Layout/MainLayout.razor.rz.scp.css */
+/* /Components/Layout/MainLayout.razor.rz.scp.css */
 #blazor-error-ui[b-1f84end3jy] {
     color-scheme: light only;
     background: lightyellow;
@@ -65,7 +65,7 @@
         align-items: start;
         align-self: end;
     }
-/* _content/Notes/Components/Layout/NavMenu.razor.rz.scp.css */
+/* /Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-kad9gxx4ky] {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -133,4 +133,45 @@
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
+}
+/* /Components/Parts/CursorTracker.razor.rz.scp.css */
+.remote-cursor[b-nsyc48ybty] {
+    position: fixed;
+    width: 0;
+    height: 0;
+    z-index: 1300;
+    pointer-events: none;
+    transition: left 55ms linear, top 55ms linear;
+    will-change: left, top;
+    filter: drop-shadow(0 2px 3px rgb(0 0 0 / 24%));
+}
+
+.remote-cursor__avatar[b-nsyc48ybty] {
+    position: absolute;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+}
+
+.remote-cursor__motion[b-nsyc48ybty] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: var(--motion-length);
+    height: var(--motion-height);
+    transform: translateY(-50%) rotate(var(--motion-angle));
+    transform-origin: 0 50%;
+    will-change: transform, width, height;
+}
+
+.remote-cursor__motion svg[b-nsyc48ybty] {
+    width: var(--motion-length);
+    height: var(--motion-height);
+    overflow: visible;
+}
+
+.remote-cursor__motion path[b-nsyc48ybty] {
+    fill: var(--cursor-color);
 }

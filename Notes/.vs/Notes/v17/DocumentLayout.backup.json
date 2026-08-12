@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\parts\\cursortracker.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\parts\\cursortracker.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\hubs\\noteshub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:hubs\\noteshub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2342D425-2E7C-4A70-8D13-FC9B5ED9F65C}|Notes.csproj|c:\\users\\noy1mr\\documents\\visual studio 2022\\github\\notes\\notes\\wwwroot\\js\\cursorhelper.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 509,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,33 +26,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NotesHub.cs",
-              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Hubs\\NotesHub.cs",
-              "RelativeDocumentMoniker": "Hubs\\NotesHub.cs",
-              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Hubs\\NotesHub.cs",
-              "RelativeToolTip": "Hubs\\NotesHub.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T14:38:04.718Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CursorTracker.razor",
-              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Parts\\CursorTracker.razor",
-              "RelativeDocumentMoniker": "Components\\Parts\\CursorTracker.razor",
-              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Parts\\CursorTracker.razor*",
-              "RelativeToolTip": "Components\\Parts\\CursorTracker.razor*",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAIwFgAAAAPAAAAAAAAAA==",
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-20T14:27:20.457Z",
+              "WhenOpened": "2025-06-20T14:46:44.828Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "CursorHelper.js",
               "DocumentMoniker": "C:\\Users\\noy1mr\\Documents\\Visual Studio 2022\\GitHub\\Notes\\Notes\\wwwroot\\Js\\CursorHelper.js",
               "RelativeDocumentMoniker": "wwwroot\\Js\\CursorHelper.js",
@@ -64,8 +47,7 @@
               "RelativeToolTip": "wwwroot\\Js\\CursorHelper.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-06-20T12:35:51.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-20T12:35:51.658Z"
             }
           ]
         },

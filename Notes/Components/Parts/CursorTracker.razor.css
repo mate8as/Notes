@@ -1,0 +1,40 @@
+.remote-cursor {
+    position: fixed;
+    width: 0;
+    height: 0;
+    z-index: 1300;
+    pointer-events: none;
+    transition: left 55ms linear, top 55ms linear;
+    will-change: left, top;
+    filter: drop-shadow(0 2px 3px rgb(0 0 0 / 24%));
+}
+
+.remote-cursor__avatar {
+    position: absolute;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+}
+
+.remote-cursor__motion {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: var(--motion-length);
+    height: var(--motion-height);
+    transform: translateY(-50%) rotate(var(--motion-angle));
+    transform-origin: 0 50%;
+    will-change: transform, width, height;
+}
+
+.remote-cursor__motion svg {
+    width: var(--motion-length);
+    height: var(--motion-height);
+    overflow: visible;
+}
+
+.remote-cursor__motion path {
+    fill: var(--cursor-color);
+}

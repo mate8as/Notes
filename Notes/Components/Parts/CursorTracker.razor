@@ -1,194 +1,255 @@
-﻿@inject NavigationManager Navigation
+@implements IAsyncDisposable
+@inject NavigationManager Navigation
 @inject IJSRuntime JS
 
-
-@foreach (KeyValuePair<string, List<(int cursorX, int cursorY)>> cursor in OtherUserCursors)
+@foreach (var cursor in OtherUserCursors.Values)
 {
-    var userId = cursor.Key;
-    var positions = cursor.Value;
+    <div class="remote-cursor" style="@GetCursorStyle(cursor)">
+        @if (IsMoving(cursor))
+        {
+            <div class="remote-cursor__motion" style="@GetMotionStyle(cursor)" aria-hidden="true">
+                <svg viewBox="0 0 40 40" preserveAspectRatio="none">
+                    <path d="M36 20 Q30 18 8 36 Q20 20 8 4 Q30 22 36 20 Z" />
+                </svg>
+            </div>
+        }
 
-
-
-    if (positions.Count < 1) continue;
-
-    var current = positions.Last();
-
-    <MudAvatar Color="Color.Primary" Style="@($"position: absolute; top: {current.cursorY - 20}px; left: {current.cursorX - 20}px;")">M</MudAvatar>
-
-
-
-    bool isMoving = LastCursorMoveTime.TryGetValue(userId, out var lastMove) &&
-    (DateTime.UtcNow - lastMove) < CursorStopThreshold;
-
-    if (isMoving)
-    {
-        double angle = SmoothedAngles.TryGetValue(userId, out var smoothedAngle) ? smoothedAngle : 0;
-
-        double baseOffset = 15;
-        double maxOffset = 25;
-        double minOffset = 10;
-        double speed = CursorSpeeds.TryGetValue(userId, out var s) ? s : 0;
-        double offset = Math.Clamp(baseOffset + speed * 25, minOffset, maxOffset);
-        double rad = angle * Math.PI / 180;
-        double triangleX = current.cursorX - 20 + offset * Math.Cos(rad);
-        double triangleY = current.cursorY - 20 + offset * Math.Sin(rad);
-
-
-        <svg width="40" height="40" style="@($"position:absolute; top:{Math.Round(triangleY, 0)}px; left:{Math.Round(triangleX, 0)}px; pointer-events:none;")">
-            <g transform="rotate(@Math.Round(angle, 0),20,20)">
-                <path d="M36,20 Q30,18 8,36 Q20,20 8,4 Q30,22 36,20 Z" fill="var(--mud-palette-primary)" />
-            </g>
-        </svg>
-    }
+        <div class="remote-cursor__avatar">
+            <MudAvatar Style="background-color:var(--cursor-color);color:var(--cursor-contrast);">
+                <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" />
+            </MudAvatar>
+        </div>
+    </div>
 }
 
 @code {
-    [Parameter]
-    public string userId { get; set; }
+    private const double VelocitySmoothingSeconds = 0.055;
+    private const double MaximumVisualSpeed = 1400;
+    private static readonly TimeSpan CursorStopThreshold = TimeSpan.FromMilliseconds(250);
 
     [Parameter]
-    public string NoteId { get; set; }
+    public string userId { get; set; } = string.Empty;
 
-    private HubConnection hubConnection;
+    [Parameter]
+    public string NoteId { get; set; } = string.Empty;
 
-    private Dictionary<string, List<(int cursorX, int cursorY)>> OtherUserCursors = new();
-    private Dictionary<string, double> SmoothedAngles = new();
-
-    private Dictionary<string, DateTime> LastCursorMoveTime = new();
-    private Dictionary<string, DateTime> LastCursorUpdateTime = new();
-    private Dictionary<string, double> CursorSpeeds = new();
-    private TimeSpan CursorStopThreshold = TimeSpan.FromMilliseconds(300);
-
-
-    private User? currentUser = null;
-    private (int width, int height) windowSize = (0, 0);
-
+    private HubConnection? hubConnection;
+    private DotNetObjectReference<CursorTracker>? dotNetReference;
+    private readonly Dictionary<string, RemoteCursorState> OtherUserCursors = new(5, StringComparer.Ordinal);
     private Timer? cursorTimer;
+    private bool renderPending;
+    private bool renderedMovingCursor;
+    private bool disposed;
 
     protected override void OnInitialized()
     {
-        cursorTimer = new Timer(async _ =>
+        cursorTimer = new Timer(_ =>
         {
-            await InvokeAsync(StateHasChanged);
-        }, null, 0, 100);
+            if (!disposed)
+                _ = InvokeAsync(RenderCursorChanges);
+        }, null, 0, 50);
+    }
+
+    private void RenderCursorChanges()
+    {
+        var hasMovingCursor = OtherUserCursors.Values.Any(IsMoving);
+
+        // Continue rendering while a tail is visible, then render once more to
+        // remove it when movement stops. Stationary cursors cause no timer renders.
+        if (!renderPending && !hasMovingCursor && !renderedMovingCursor)
+            return;
+
+        renderPending = false;
+        renderedMovingCursor = hasMovingCursor;
+        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!firstRender)
+            return;
+
+        dotNetReference = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("CursorHelper.SetDotnetReference", dotNetReference);
+
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/noteshub"))
+            .WithAutomaticReconnect()
+            .Build();
+
+        hubConnection.On<string, int, int>("ReceiveCursorUpdate", HandleReceiveCursorUpdate);
+
+        try
         {
-            var lDotNetReference = DotNetObjectReference.Create(this);
-
-            await JS.InvokeVoidAsync("CursorHelper.SetDotnetReference", lDotNetReference);
-            await SetWindowSize();
-
-            hubConnection = new HubConnectionBuilder().WithUrl(Navigation.ToAbsoluteUri("/noteshub")).WithAutomaticReconnect().Build();
-
-            hubConnection.On<string, int, int>("ReceiveCursorUpdate", HandleReceiveCursorUpdate);
-
-            try
-            {
-                await hubConnection.StartAsync();
-                await hubConnection.SendAsync("JoinNote", NoteId);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("SignalR connection failed: " + ex.Message);
-            }
+            await hubConnection.StartAsync();
+            await hubConnection.SendAsync("JoinNote", NoteId);
         }
-
-
-        base.OnAfterRender(firstRender);
+        catch (Exception ex)
+        {
+            Console.WriteLine("SignalR connection failed: " + ex.Message);
+        }
     }
 
-    private async Task HandleReceiveCursorUpdate(string otherUserId, int positionX, int positionY)
+    private Task HandleReceiveCursorUpdate(string otherUserId, int positionX, int positionY)
     {
-        if (!OtherUserCursors.ContainsKey(otherUserId))
-            OtherUserCursors[otherUserId] = new();
-
-        var cursorList = OtherUserCursors[otherUserId];
-
-        if (cursorList.Count >= 10)
-            cursorList.RemoveAt(0);
-
-        cursorList.Add((positionX, positionY));
-        LastCursorMoveTime[otherUserId] = DateTime.UtcNow;
-
-        double speed = 0;
-
-        if (cursorList.Count >= 2)
+        return InvokeAsync(() =>
         {
-            var prev = cursorList[^2];
-            var current = cursorList[^1];
-
-            var dx = current.cursorX - prev.cursorX;
-            var dy = current.cursorY - prev.cursorY;
-            var distance = Math.Sqrt(dx * dx + dy * dy);
-
-            if (dx != 0 || dy != 0)
-            {
-                double newAngle = Math.Atan2(dy, dx) * (180.0 / Math.PI) + 180;
-
-                if (!SmoothedAngles.TryGetValue(otherUserId, out var oldAngle))
-                    oldAngle = newAngle;
-
-                double smoothing = 0.2;
-                double smoothed = oldAngle * (1 - smoothing) + newAngle * smoothing;
-
-                SmoothedAngles[otherUserId] = smoothed;
-            }
-
-            DateTime now = DateTime.UtcNow;
-            if (LastCursorUpdateTime.TryGetValue(otherUserId, out var lastTime))
-            {
-                var ms = (now - lastTime).TotalMilliseconds;
-                if (ms > 0) speed = distance / ms;
-            }
-            LastCursorUpdateTime[otherUserId] = now;
-
-            CursorSpeeds[otherUserId] = speed;
-        }
-        else
-        {
-            LastCursorUpdateTime[otherUserId] = DateTime.UtcNow;
-            CursorSpeeds[otherUserId] = 0;
-        }
-
-        await InvokeAsync(StateHasChanged);
+            UpdateCursor(otherUserId, positionX, positionY, DateTime.UtcNow);
+            renderPending = true;
+        });
     }
 
-    [JSInvokable]
-    public async Task SetWindowSize(int? width = null, int? height = null)
+    private void UpdateCursor(string otherUserId, int positionX, int positionY, DateTime now)
     {
-        if (width != null && height != null)
+        if (!OtherUserCursors.TryGetValue(otherUserId, out var cursor))
         {
-            windowSize = (width.Value, height.Value);
+            var color = CreateCursorColor(otherUserId);
+            OtherUserCursors[otherUserId] = new RemoteCursorState
+            {
+                X = positionX,
+                Y = positionY,
+                Color = color.Background,
+                ContrastColor = color.Foreground,
+                LastSampleAt = now,
+                LastMoveAt = now
+            };
             return;
         }
 
-        var size = await JS.InvokeAsync<int[]>("CursorHelper.GetWindowSize");
+        var dx = positionX - cursor.X;
+        var dy = positionY - cursor.Y;
+        var elapsedSeconds = (now - cursor.LastSampleAt).TotalSeconds;
 
-        windowSize = (size[0], size[1]);
+        cursor.X = positionX;
+        cursor.Y = positionY;
+        cursor.LastSampleAt = now;
+
+        if (elapsedSeconds <= 0 || (dx == 0 && dy == 0))
+            return;
+
+        // A minimum interval prevents a burst of queued network messages from
+        // producing an unrealistic speed spike.
+        elapsedSeconds = Math.Max(elapsedSeconds, 1.0 / 120.0);
+
+        var measuredVelocityX = dx / elapsedSeconds;
+        var measuredVelocityY = dy / elapsedSeconds;
+        var smoothing = elapsedSeconds > CursorStopThreshold.TotalSeconds
+            ? 1.0
+            : 1.0 - Math.Exp(-elapsedSeconds / VelocitySmoothingSeconds);
+
+        cursor.VelocityX += (measuredVelocityX - cursor.VelocityX) * smoothing;
+        cursor.VelocityY += (measuredVelocityY - cursor.VelocityY) * smoothing;
+        cursor.LastMoveAt = now;
+    }
+
+    private static bool IsMoving(RemoteCursorState cursor)
+    {
+        return DateTime.UtcNow - cursor.LastMoveAt < CursorStopThreshold
+            && cursor.Speed > 20;
+    }
+
+    private static string GetCursorStyle(RemoteCursorState cursor)
+    {
+        return FormattableString.Invariant(
+            $"left:{cursor.X}px;top:{cursor.Y}px;--cursor-color:{cursor.Color};--cursor-contrast:{cursor.ContrastColor};");
+    }
+
+    private static (string Background, string Foreground) CreateCursorColor(string id)
+    {
+        // FNV-1a gives every user a stable pseudo-random hue on every client.
+        // A fixed saturation/lightness keeps the colors lively in both themes.
+        uint hash = 2166136261;
+        foreach (var character in id)
+        {
+            hash ^= character;
+            hash *= 16777619;
+        }
+
+        var hue = hash % 360;
+        const double saturation = 0.72;
+        const double lightness = 0.45;
+        var chroma = (1 - Math.Abs(2 * lightness - 1)) * saturation;
+        var section = hue / 60.0;
+        var secondary = chroma * (1 - Math.Abs(section % 2 - 1));
+
+        var (red, green, blue) = section switch
+        {
+            < 1 => (chroma, secondary, 0.0),
+            < 2 => (secondary, chroma, 0.0),
+            < 3 => (0.0, chroma, secondary),
+            < 4 => (0.0, secondary, chroma),
+            < 5 => (secondary, 0.0, chroma),
+            _ => (chroma, 0.0, secondary)
+        };
+
+        var match = lightness - chroma / 2;
+        var redByte = (byte)Math.Round((red + match) * 255);
+        var greenByte = (byte)Math.Round((green + match) * 255);
+        var blueByte = (byte)Math.Round((blue + match) * 255);
+        var background = $"#{redByte:X2}{greenByte:X2}{blueByte:X2}";
+        var perceivedBrightness = (redByte * 299 + greenByte * 587 + blueByte * 114) / 1000;
+        var foreground = perceivedBrightness > 145 ? "#171717" : "#FFFFFF";
+
+        return (background, foreground);
+    }
+
+    private static string GetMotionStyle(RemoteCursorState cursor)
+    {
+        // Point the motion shape behind the avatar, like a tail being dragged.
+        var angle = Math.Atan2(cursor.VelocityY, cursor.VelocityX) * 180.0 / Math.PI + 180;
+        var intensity = Math.Clamp(cursor.Speed / MaximumVisualSpeed, 0, 1);
+        // Most of the shape sits underneath the 40px avatar. As speed increases,
+        // its tapered end grows beyond the circle and turns the combined
+        // silhouette into a teardrop instead of a separate direction marker.
+        var length = 22 + 42 * Math.Sqrt(intensity);
+        var height = 34 + 6 * intensity;
+
+        return FormattableString.Invariant(
+            $"--motion-angle:{angle:0.###}deg;--motion-length:{length:0.###}px;--motion-height:{height:0.###}px;");
     }
 
     [JSInvokable]
     public async Task OnCursorMoved(int cursorX, int cursorY)
     {
-        if (hubConnection == null)
-        {
+        if (hubConnection?.State != HubConnectionState.Connected)
             return;
-        }
 
         await hubConnection.SendAsync("UpdateCursor", NoteId, userId, cursorX, cursorY);
     }
 
     public async ValueTask DisposeAsync()
     {
+        disposed = true;
+        cursorTimer?.Dispose();
+
         if (hubConnection is not null)
-        {
             await hubConnection.DisposeAsync();
+
+        if (dotNetReference is not null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("CursorHelper.ClearDotnetReference");
+            }
+            catch (JSDisconnectedException)
+            {
+                // The browser has already disconnected, so there is no callback to clear.
+            }
         }
 
-        cursorTimer?.Dispose();
+        dotNetReference?.Dispose();
+    }
+
+    private sealed class RemoteCursorState
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public string Color { get; set; } = string.Empty;
+        public string ContrastColor { get; set; } = string.Empty;
+        public double VelocityX { get; set; }
+        public double VelocityY { get; set; }
+        public DateTime LastSampleAt { get; set; }
+        public DateTime LastMoveAt { get; set; }
+        public double Speed => Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
     }
 }

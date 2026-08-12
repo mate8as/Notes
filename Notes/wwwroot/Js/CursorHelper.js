@@ -6,6 +6,9 @@
     let lastX = 0;
     let lastY = 0;
     let dirty = false;
+    let sendInFlight = false;
+    let lastSentAt = 0;
+    const sendInterval = 1000 / 30;
 
     document.addEventListener('mousemove', function (event) {
         lastX = event.clientX;
@@ -13,28 +16,35 @@
         dirty = true;
     });
 
-    function sendLoop() {
-        if (dirty && GLOBAL.DotNetReference != null) {
-            GLOBAL.DotNetReference.invokeMethodAsync('OnCursorMoved', lastX, lastY);
+    function sendLoop(timestamp) {
+        if (dirty && !sendInFlight && GLOBAL.DotNetReference != null && timestamp - lastSentAt >= sendInterval) {
+            const dotNetReference = GLOBAL.DotNetReference;
+            const x = lastX;
+            const y = lastY;
+
             dirty = false;
+            sendInFlight = true;
+            lastSentAt = timestamp;
+
+            dotNetReference.invokeMethodAsync('OnCursorMoved', x, y)
+                .catch(function () {
+                    // The component may have been disposed during navigation.
+                })
+                .finally(function () {
+                    sendInFlight = false;
+                });
         }
         requestAnimationFrame(sendLoop);
     }
 
     requestAnimationFrame(sendLoop);
 
-    window.addEventListener('resize', function () {
-        if (GLOBAL.DotNetReference != null) {
-            GLOBAL.DotNetReference.invokeMethodAsync('SetWindowSize', window.innerWidth, window.innerHeight);
-        }
-    }, true);
-
     window.CursorHelper = {
         SetDotnetReference: function (pDotNetReference) {
             GLOBAL.DotNetReference = pDotNetReference;
         },
-        GetWindowSize: function () {
-            return [window.innerWidth, window.innerHeight];
+        ClearDotnetReference: function () {
+            GLOBAL.DotNetReference = null;
         }
     };
 })();

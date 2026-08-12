@@ -3,12 +3,15 @@ build_property.MudDebugAnalyzer =
 build_property.MudAllowedAttributePattern = 
 build_property.MudAllowedAttributeList = 
 build_property.TargetFramework = net9.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v9.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Notes
 build_property.RootNamespace = Notes
@@ -51,10 +54,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noy1mr/Documents/Visual Studio 2022/GitHub/Notes/Notes/Components/Parts/CursorTracker.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYXJ0c1xDdXJzb3JUcmFja2VyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/noy1mr/Documents/Visual Studio 2022/GitHub/Notes/Notes/Components/Parts/DarkModeSwitch.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYXJ0c1xEYXJrTW9kZVN3aXRjaC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -78,3 +77,7 @@ build_metadata.AdditionalFiles.CssScope = b-1f84end3jy
 [C:/Users/noy1mr/Documents/Visual Studio 2022/GitHub/Notes/Notes/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-kad9gxx4ky
+
+[C:/Users/noy1mr/Documents/Visual Studio 2022/GitHub/Notes/Notes/Components/Parts/CursorTracker.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYXJ0c1xDdXJzb3JUcmFja2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-nsyc48ybty
